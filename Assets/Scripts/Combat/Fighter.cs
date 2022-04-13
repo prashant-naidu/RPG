@@ -18,7 +18,7 @@ namespace RPG.Combat
         public float TimeBetweenAttacks = 1f;
         public float WeaponDamage = 5f;
 
-        private Transform m_Target;
+        private Health m_Target;
         private float m_TimeSinceLastAttack = 0f;
 
         private void Update()
@@ -26,12 +26,13 @@ namespace RPG.Combat
             m_TimeSinceLastAttack += Time.deltaTime;
 
             if (m_Target == null) return;
+            if (m_Target.IsDead) return;
 
-            bool isInRange = Vector3.Distance(transform.position, m_Target.position) < WeaponRange;
+            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < WeaponRange;
 
             if (!isInRange)
             {
-                m_Mover.MoveTo(m_Target.position);
+                m_Mover.MoveTo(m_Target.transform.position);
             }
             else
             {
@@ -42,9 +43,12 @@ namespace RPG.Combat
 
         private void AttackBehaviour()
         {
+            transform.LookAt(m_Target.transform);
+
             if (m_TimeSinceLastAttack > TimeBetweenAttacks)
             {
                 // This will trigger the Hit() event
+                m_Animator.ResetTrigger("stopAttack");
                 m_Animator.SetTrigger("attack");
                 m_TimeSinceLastAttack = 0;
             }
@@ -53,17 +57,27 @@ namespace RPG.Combat
         // Animation Event
         private void Hit()
         {
-            m_Target?.GetComponent<Health>().TakeDamage(WeaponDamage);
+            m_Target.TakeDamage(WeaponDamage);
+        }
+
+        public bool CanAttack(CombatTarget combatTarget)
+        {
+            if (combatTarget == null) { return false; }
+
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return !targetToTest.IsDead;
         }
 
         public void Attack(CombatTarget combatTarget)
         {
             m_ActionScheduler.StartAction(this);
-            m_Target = combatTarget.transform;
+            m_Target = combatTarget.GetComponent<Health>();
         }
 
         public void Cancel()
         {
+            m_Animator.ResetTrigger("attack");
+            m_Animator.SetTrigger("stopAttack");
             m_Target = null;
         }
     }
