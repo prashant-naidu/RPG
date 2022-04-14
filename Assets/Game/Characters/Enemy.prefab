@@ -40,9 +40,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Fighter: {fileID: 4068981031138486393}
   m_Health: {fileID: 1642635102414750344}
-  WeaponRange: 2
-  TimeBetweenAttacks: 1
-  WeaponDamage: 5
+  m_Mover: {fileID: 4455303609448209562}
   ChaseDistance: 5
 --- !u!1001 &7300595840320264349
 PrefabInstance:
@@ -162,6 +160,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97ac8c07a7b4a1b4c9a480132601edc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4455303609448209562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6378370562394604551, guid: 73774626da4607a469c732c0fd85dc28,
+    type: 3}
+  m_PrefabInstance: {fileID: 7300595840320264349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428545214146194806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ccb46d08b19ebe4bb28d9c10d4a5728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7920921990084238503
