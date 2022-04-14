@@ -11,9 +11,6 @@ namespace RPG.Control
         [SerializeField] private Health m_Health;
 
         [Header("Parameters")]
-        public float WeaponRange = 2f;
-        public float TimeBetweenAttacks = 1f;
-        public float WeaponDamage = 5f;
         public float ChaseDistance = 5f;
 
         private GameObject m_PlayerGO;
