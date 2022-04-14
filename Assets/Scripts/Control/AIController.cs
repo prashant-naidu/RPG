@@ -1,4 +1,5 @@
 ﻿using RPG.Combat;
+using RPG.Core;
 using UnityEngine;
 
 namespace RPG.Control
@@ -7,6 +8,7 @@ namespace RPG.Control
     {
         [Header("Dependencies")]
         [SerializeField] private Fighter m_Fighter;
+        [SerializeField] private Health m_Health;
 
         [Header("Parameters")]
         public float WeaponRange = 2f;
@@ -23,6 +25,8 @@ namespace RPG.Control
 
         private void Update()
         {
+            if (m_Health.IsDead) return;
+
             if (IsPlayerInAttackingRange() && m_Fighter.CanAttack(m_PlayerGO))
             {
                 m_Fighter.Attack(m_PlayerGO);

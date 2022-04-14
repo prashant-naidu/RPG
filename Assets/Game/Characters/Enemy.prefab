@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Fighter: {fileID: 4068981031138486393}
+  m_Health: {fileID: 1642635102414750344}
   WeaponRange: 2
   TimeBetweenAttacks: 1
   WeaponDamage: 5
@@ -139,6 +140,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7300595840320264349}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1642635102414750344 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8330290215218256405, guid: 73774626da4607a469c732c0fd85dc28,
+    type: 3}
+  m_PrefabInstance: {fileID: 7300595840320264349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428545214146194806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32b939566772294398d0a672e28d5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4068981031138486393 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6712335474456015076, guid: 73774626da4607a469c732c0fd85dc28,

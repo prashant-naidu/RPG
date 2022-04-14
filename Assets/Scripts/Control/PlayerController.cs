@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -11,10 +12,13 @@ namespace RPG.Control
         [Header("Dependencies")]
         [SerializeField] private Mover m_Mover;
         [SerializeField] private Fighter m_Fighter;
+        [SerializeField] private Health m_Health;
 
         // Update is called once per frame
         void Update()
         {
+            if (m_Health.IsDead) return;
+
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
         }
@@ -40,8 +44,9 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-            RaycastHit hit;
 
+
+            RaycastHit hit;
             if (Physics.Raycast(GetMouseRay(), out hit))
             {
                 if (Input.GetMouseButton(0))

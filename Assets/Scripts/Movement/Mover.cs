@@ -12,9 +12,12 @@ namespace RPG.Movement
         [SerializeField] private ActionScheduler m_ActionScheduler;
         [SerializeField] private NavMeshAgent m_NavMeshAgent;
         [SerializeField] private Animator m_Animator;
+        [SerializeField] private Health m_Health;
 
         void Update()
         {
+            m_NavMeshAgent.enabled = !m_Health.IsDead;
+
             UpdateAnimator();
         }
 

@@ -163,6 +163,7 @@ MonoBehaviour:
   m_ActionScheduler: {fileID: 2418929455436153818}
   m_NavMeshAgent: {fileID: 4982450296713155695}
   m_Animator: {fileID: 1972564694981589872}
+  m_Health: {fileID: 8330290215218256405}
 --- !u!114 &2418929455436153818
 MonoBehaviour:
   m_ObjectHideFlags: 0
