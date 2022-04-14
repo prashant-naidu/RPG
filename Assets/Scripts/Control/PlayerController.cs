@@ -44,8 +44,6 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-
-
             RaycastHit hit;
             if (Physics.Raycast(GetMouseRay(), out hit))
             {
