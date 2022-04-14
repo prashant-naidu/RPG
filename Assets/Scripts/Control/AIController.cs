@@ -37,6 +37,12 @@ namespace RPG.Control
             }
         }
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, ChaseDistance);
+        }
+
         private bool IsPlayerInAttackingRange()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, m_PlayerGO.transform.position);
