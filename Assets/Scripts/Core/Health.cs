@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Combat
+namespace RPG.Core
 {
     public class Health : MonoBehaviour
     {
+        [Header("Dependencies")]
+        [SerializeField] private Animator m_Animator;
+        [SerializeField] private ActionScheduler m_ActionScheduler;
+        
+        [Header("Parameters")]
         public float health = 100f;
 
         private bool m_IsDead = false;
@@ -30,8 +35,10 @@ namespace RPG.Combat
         {
             if (m_IsDead) return;
 
-            GetComponent<Animator>().SetTrigger("die");
             m_IsDead = true;
+
+            m_Animator.SetTrigger("die");
+            m_ActionScheduler.CancelCurrentAction();
         }
     }
 }

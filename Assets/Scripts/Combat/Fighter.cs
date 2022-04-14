@@ -19,7 +19,7 @@ namespace RPG.Combat
         public float WeaponDamage = 5f;
 
         private Health m_Target;
-        private float m_TimeSinceLastAttack = 0f;
+        private float m_TimeSinceLastAttack = Mathf.Infinity;
 
         private void Update()
         {
@@ -57,10 +57,10 @@ namespace RPG.Combat
         // Animation Event
         private void Hit()
         {
-            m_Target.TakeDamage(WeaponDamage);
+            m_Target?.TakeDamage(WeaponDamage);
         }
 
-        public bool CanAttack(CombatTarget combatTarget)
+        public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) { return false; }
 
@@ -68,7 +68,7 @@ namespace RPG.Combat
             return !targetToTest.IsDead;
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             m_ActionScheduler.StartAction(this);
             m_Target = combatTarget.GetComponent<Health>();
