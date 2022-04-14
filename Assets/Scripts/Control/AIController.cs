@@ -1,6 +1,7 @@
 ﻿using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using System;
 using UnityEngine;
 
 namespace RPG.Control
@@ -13,6 +14,10 @@ namespace RPG.Control
         [SerializeField] private Mover m_Mover;
         [SerializeField] private ActionScheduler m_ActionScheduler;
 
+        [Header("Patrol")]
+        [SerializeField] private PatrolPath m_PatrolPath;
+        public float WaypointDwellTime = 4f;
+
         [Header("Parameters")]
         public float ChaseDistance = 5f;
         public float SuspicionTime = 4f;
@@ -20,6 +25,9 @@ namespace RPG.Control
         private GameObject m_PlayerGO;
         private Vector3 m_GuardPosition;
         private float m_TimeSincePlayerLastSeen = Mathf.Infinity;
+        private float m_TimeSinceArrivedAtWaypoint = Mathf.Infinity;
+        private float m_WaypointTolerance = 1f;
+        private int m_CurrentWaypointIndex = 0;
 
         private void Awake()
         {
@@ -33,7 +41,6 @@ namespace RPG.Control
 
             if (IsPlayerInAttackingRange() && m_Fighter.CanAttack(m_PlayerGO))
             {
-                m_TimeSincePlayerLastSeen = 0;
                 AttackBehaviour();
             }
             else if (m_TimeSincePlayerLastSeen < SuspicionTime)
@@ -42,13 +49,21 @@ namespace RPG.Control
             }
             else
             {
-                GuardBehaviour();
+                PatrolBehaviour();
             }
 
-            m_TimeSincePlayerLastSeen += Time.deltaTime;
+            UpdateTimers();
         }
+
+        private void UpdateTimers()
+        {
+            m_TimeSincePlayerLastSeen += Time.deltaTime;
+            m_TimeSinceArrivedAtWaypoint += Time.deltaTime;
+        }
+
         private void AttackBehaviour()
         {
+            m_TimeSincePlayerLastSeen = 0;
             m_Fighter.Attack(m_PlayerGO);
         }
 
@@ -57,9 +72,40 @@ namespace RPG.Control
             m_ActionScheduler.CancelCurrentAction();
         }
 
-        private void GuardBehaviour()
+        private void PatrolBehaviour()
         {
-            m_Mover.StartMoveAction(m_GuardPosition);
+            Vector3 nextPosition = m_GuardPosition;
+
+            if (m_PatrolPath != null)
+            {
+                if (AtWaypoint())
+                {
+                    m_TimeSinceArrivedAtWaypoint = 0;
+                    CycleWaypoint();
+                }
+                nextPosition = GetCurrentWaypoint();
+            }
+            
+            if (m_TimeSinceArrivedAtWaypoint > WaypointDwellTime)
+            {
+                m_Mover.StartMoveAction(nextPosition);
+            }
+        }
+
+        private bool AtWaypoint()
+        {
+            float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
+            return distanceToWaypoint < m_WaypointTolerance;
+        }
+
+        private void CycleWaypoint()
+        {
+            m_CurrentWaypointIndex = m_PatrolPath.GetNextIndex(m_CurrentWaypointIndex);
+        }
+
+        private Vector3 GetCurrentWaypoint()
+        {
+            return m_PatrolPath.GetWaypoint(m_CurrentWaypointIndex);
         }
 
         private void OnDrawGizmosSelected()
