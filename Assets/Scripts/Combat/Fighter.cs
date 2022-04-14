@@ -19,7 +19,7 @@ namespace RPG.Combat
         public float WeaponDamage = 5f;
 
         private Health m_Target;
-        private float m_TimeSinceLastAttack = 0f;
+        private float m_TimeSinceLastAttack = Mathf.Infinity;
 
         private void Update()
         {
