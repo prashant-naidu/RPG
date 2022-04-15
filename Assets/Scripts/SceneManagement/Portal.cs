@@ -17,6 +17,9 @@ namespace RPG.SceneManagement
         public int SceneToLoad = -1;
         public Transform SpawnPoint;
         public DestinationIdentifier Destination;
+        public float FadeOutTime = 1f;
+        public float FadeInTime = 2f;
+        public float FadeWaitTime = 0.5f;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -35,10 +38,17 @@ namespace RPG.SceneManagement
             }
 
             DontDestroyOnLoad(gameObject);
+
+            Fader fader = FindObjectOfType<Fader>();
+
+            yield return fader.FadeOut(FadeOutTime);
             yield return SceneManager.LoadSceneAsync(SceneToLoad);
 
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
+
+            yield return new WaitForSeconds(FadeWaitTime);
+            yield return fader.FadeIn(FadeInTime);
 
             Destroy(gameObject);
         }
