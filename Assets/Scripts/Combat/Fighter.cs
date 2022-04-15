@@ -76,9 +76,15 @@ namespace RPG.Combat
 
         public void Cancel()
         {
+            StopAttackAnimation();
+            m_Target = null;
+            m_Mover.Cancel();
+        }
+
+        private void StopAttackAnimation()
+        {
             m_Animator.ResetTrigger("attack");
             m_Animator.SetTrigger("stopAttack");
-            m_Target = null;
         }
     }
 }
