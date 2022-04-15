@@ -40,7 +40,6 @@ namespace RPG.SceneManagement
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
-            print("scene loaded");
             Destroy(gameObject);
         }
 
