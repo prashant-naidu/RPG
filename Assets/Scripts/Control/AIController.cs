@@ -28,6 +28,8 @@ namespace RPG.Control
         private float m_TimeSinceArrivedAtWaypoint = Mathf.Infinity;
         private float m_WaypointTolerance = 1f;
         private int m_CurrentWaypointIndex = 0;
+        [Range(0,1)]
+        private float m_PatrolSpeedFraction = 0.2f;
 
         private void Awake()
         {
@@ -88,7 +90,7 @@ namespace RPG.Control
             
             if (m_TimeSinceArrivedAtWaypoint > WaypointDwellTime)
             {
-                m_Mover.StartMoveAction(nextPosition);
+                m_Mover.StartMoveAction(nextPosition, m_PatrolSpeedFraction);
             }
         }
 

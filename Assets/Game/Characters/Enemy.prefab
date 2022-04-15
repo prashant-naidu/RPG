@@ -42,7 +42,10 @@ MonoBehaviour:
   m_Health: {fileID: 1642635102414750344}
   m_Mover: {fileID: 4455303609448209562}
   m_ActionScheduler: {fileID: 4954292444150340423}
+  m_PatrolPath: {fileID: 0}
+  WaypointDwellTime: 4
   ChaseDistance: 5
+  SuspicionTime: 4
 --- !u!1001 &7300595840320264349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,10 +123,15 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6712335474456015076, guid: 73774626da4607a469c732c0fd85dc28,
+        type: 3}
+      propertyPath: WeaponDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8330290215218256405, guid: 73774626da4607a469c732c0fd85dc28,
         type: 3}
       propertyPath: health
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73774626da4607a469c732c0fd85dc28, type: 3}

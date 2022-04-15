@@ -14,6 +14,8 @@ namespace RPG.Movement
         [SerializeField] private Animator m_Animator;
         [SerializeField] private Health m_Health;
 
+        private static float m_MaxSpeed = 5.66f;
+
         void Update()
         {
             m_NavMeshAgent.enabled = !m_Health.IsDead;
@@ -21,15 +23,16 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
-        public void StartMoveAction(Vector3 destination)
+        public void StartMoveAction(Vector3 destination, float speedFraction)
         {
             m_ActionScheduler.StartAction(this);
-            MoveTo(destination);
+            MoveTo(destination, speedFraction);
         }
 
-        public void MoveTo(Vector3 destination)
+        public void MoveTo(Vector3 destination, float speedFraction)
         {
             m_NavMeshAgent.destination = destination;
+            m_NavMeshAgent.speed = m_MaxSpeed * Mathf.Clamp01(speedFraction);
             m_NavMeshAgent.isStopped = false;
         }
 
