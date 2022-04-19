@@ -57,13 +57,21 @@ namespace RPG.Saving
             }
         }
 
-        private bool IsUnique(string candidate)
+        private bool IsUnique(string candidateId)
         {
-            if (!globalLookup.ContainsKey(candidate)) return true;
-            if (globalLookup[candidate] == this) return true;
-            if (globalLookup[candidate] == null)
+            // cases where designer duplicates a saveable asset in the scene
+            if (!globalLookup.ContainsKey(candidateId)) return true;
+            if (globalLookup[candidateId] == this) return true;
+            // case where designer switches scenes
+            if (globalLookup[candidateId] == null)
             {
-                globalLookup.Remove(candidate);
+                globalLookup.Remove(candidateId);
+                return true;
+            }
+            // case where designer manually changes id in inspector
+            if (globalLookup[candidateId].Id != candidateId)
+            {
+                globalLookup.Remove(candidateId);
                 return true;
             }
             return false;
