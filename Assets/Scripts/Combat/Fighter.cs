@@ -15,7 +15,8 @@ namespace RPG.Combat
         [SerializeField] private Animator m_Animator;
 
         [Header("Other")]
-        [SerializeField] private Transform m_HandTransform = null;
+        [SerializeField] private Transform m_RightHandTransform = null;
+        [SerializeField] private Transform m_LeftHandTransform = null;
         [SerializeField] private Weapon m_DefaultWeapon = null;
         [SerializeField] private Weapon m_CurrentWeapon = null;
 
@@ -53,7 +54,7 @@ namespace RPG.Combat
         public void EquipWeapon(Weapon weapon)
         {
             m_CurrentWeapon = weapon;
-            m_CurrentWeapon.Spawn(m_HandTransform, m_Animator);
+            m_CurrentWeapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
         }
 
         private void AttackBehaviour()
