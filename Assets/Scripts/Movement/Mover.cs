@@ -59,7 +59,13 @@ namespace RPG.Movement
         {
             SerializableVector3 position = (SerializableVector3)state;
             m_NavMeshAgent.enabled = false;
-            transform.position = position.GetVector();
+
+            NavMeshHit closestHit;
+            if (NavMesh.SamplePosition(position.GetVector(), out closestHit, 500, 1))
+            {
+                transform.position = closestHit.position;
+            }
+
             m_NavMeshAgent.enabled = true;
             m_ActionScheduler.CancelCurrentAction();
         }
