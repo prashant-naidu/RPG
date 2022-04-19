@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using RPG.Saving;
+using System.Collections;
 using UnityEngine;
 
-namespace RPG.Saving
+namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
@@ -10,10 +10,14 @@ namespace RPG.Saving
         [SerializeField] private SavingSystem m_SavingSystem;
 
         const string defaultSaveFile = "save";
+        const float FadeInTime = 0.3f;
 
         private IEnumerator Start()
         {
+            Fader fader = FindObjectOfType<Fader>();
+            fader.FadeOutImmediate();
             yield return m_SavingSystem.LoadLastScene(defaultSaveFile);
+            yield return fader.FadeIn(FadeInTime);
         }
 
         private void Update()
