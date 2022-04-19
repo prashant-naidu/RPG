@@ -16,7 +16,8 @@ namespace RPG.Combat
 
         [Header("Other")]
         [SerializeField] private Transform m_HandTransform = null;
-        [SerializeField] private Weapon m_Weapon = null;
+        [SerializeField] private Weapon m_DefaultWeapon = null;
+        [SerializeField] private Weapon m_CurrentWeapon = null;
 
         [Header("Parameters")]
         public float TimeBetweenAttacks = 1f;
@@ -26,7 +27,7 @@ namespace RPG.Combat
 
         private void Start()
         {
-            SpawnWeapon();
+            EquipWeapon(m_DefaultWeapon);
         }
 
         private void Update()
@@ -36,7 +37,7 @@ namespace RPG.Combat
             if (m_Target == null) return;
             if (m_Target.IsDead) return;
 
-            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < m_Weapon.Range;
+            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < m_CurrentWeapon.Range;
 
             if (!isInRange)
             {
@@ -49,12 +50,10 @@ namespace RPG.Combat
             }
         }
 
-        private void SpawnWeapon()
+        public void EquipWeapon(Weapon weapon)
         {
-            if (m_Weapon != null)
-            {
-                m_Weapon.Spawn(m_HandTransform, m_Animator);
-            }
+            m_CurrentWeapon = weapon;
+            m_CurrentWeapon.Spawn(m_HandTransform, m_Animator);
         }
 
         private void AttackBehaviour()
@@ -73,7 +72,7 @@ namespace RPG.Combat
         // Animation Event
         private void Hit()
         {
-            m_Target?.TakeDamage(m_Weapon.Damage);
+            m_Target?.TakeDamage(m_CurrentWeapon.Damage);
         }
 
         public bool CanAttack(GameObject combatTarget)
