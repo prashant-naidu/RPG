@@ -1,5 +1,7 @@
-﻿using UnityEditor;
+﻿using RPG.Core;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace RPG.Saving
 {
@@ -8,11 +10,7 @@ namespace RPG.Saving
     {
         [SerializeField] private string m_Id = "";
 
-        //private void Awake()
-        //{
-        //    m_Id = System.Guid.NewGuid().ToString();
-        //}
-
+#if UNITY_EDITOR
         private void Update()
         {
             if (Application.IsPlaying(gameObject)) return;
@@ -27,6 +25,7 @@ namespace RPG.Saving
                 serializedObject.ApplyModifiedProperties();
             }
         }
+#endif
 
         public string GetUniqueIdentifier()
         {
@@ -35,13 +34,16 @@ namespace RPG.Saving
 
         public object CaptureState()
         {
-            print("Capturing state for " + GetUniqueIdentifier());
-            return null;
+            return new SerializableVector3(transform.position);
         }
 
         public void RestoreState(object state)
         {
-            print("Restoring state for " + GetUniqueIdentifier());
+            SerializableVector3 position = (SerializableVector3)state;
+            GetComponent<NavMeshAgent>().enabled = false;
+            transform.position = position.GetVector();
+            GetComponent<NavMeshAgent>().enabled = true;
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 }
