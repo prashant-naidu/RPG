@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
+using System;
 
 namespace RPG.Combat
 {
@@ -13,6 +14,10 @@ namespace RPG.Combat
         [SerializeField] private Mover m_Mover;
         [SerializeField] private Animator m_Animator;
 
+        [Header("Other")]
+        [SerializeField] private Transform m_HandTransform = null;
+        [SerializeField] private GameObject m_WeaponPrefab = null;
+
         [Header("Parameters")]
         public float WeaponRange = 2f;
         public float TimeBetweenAttacks = 1f;
@@ -20,6 +25,11 @@ namespace RPG.Combat
 
         private Health m_Target;
         private float m_TimeSinceLastAttack = Mathf.Infinity;
+
+        private void Start()
+        {
+            SpawnWeapon();
+        }
 
         private void Update()
         {
@@ -38,6 +48,14 @@ namespace RPG.Combat
             {
                 m_Mover.Cancel();
                 AttackBehaviour();
+            }
+        }
+
+        private void SpawnWeapon()
+        {
+            if (m_WeaponPrefab != null)
+            {
+                Instantiate(m_WeaponPrefab, m_HandTransform);
             }
         }
 
