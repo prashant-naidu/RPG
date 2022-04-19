@@ -16,7 +16,7 @@ namespace RPG.Combat
 
         [Header("Other")]
         [SerializeField] private Transform m_HandTransform = null;
-        [SerializeField] private GameObject m_WeaponPrefab = null;
+        [SerializeField] private Weapon m_Weapon = null;
 
         [Header("Parameters")]
         public float WeaponRange = 2f;
@@ -53,9 +53,9 @@ namespace RPG.Combat
 
         private void SpawnWeapon()
         {
-            if (m_WeaponPrefab != null)
+            if (m_Weapon != null)
             {
-                Instantiate(m_WeaponPrefab, m_HandTransform);
+                m_Weapon.Spawn(m_HandTransform, m_Animator);
             }
         }
 

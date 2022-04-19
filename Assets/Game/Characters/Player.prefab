@@ -199,6 +199,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6798422952536447052, guid: 69fd2c95bcc2a7540b182f549825e6e2,
         type: 3}
+    - target: {fileID: 6712335474456015076, guid: 73774626da4607a469c732c0fd85dc28,
+        type: 3}
+      propertyPath: m_WeaponAnimationOverrideController
+      value: 
+      objectReference: {fileID: 22100000, guid: 3bde07ae58ffb1f4d89e53158c3232eb,
+        type: 2}
     - target: {fileID: 6493227818098774576, guid: 73774626da4607a469c732c0fd85dc28,
         type: 3}
       propertyPath: m_Id
