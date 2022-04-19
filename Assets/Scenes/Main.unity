@@ -886,7 +886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &199046520
 Transform:
   m_ObjectHideFlags: 0
@@ -1681,6 +1681,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4068981031138486393, guid: 80bbfeb2cdab3f44a913dbf4eea8fd35,
+        type: 3}
+      propertyPath: m_DefaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a31dae1d4f048e4da8ed2c891b31940,
+        type: 2}
     - target: {fileID: 4561154047944264365, guid: 80bbfeb2cdab3f44a913dbf4eea8fd35,
         type: 3}
       propertyPath: m_Id
@@ -2380,7 +2386,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600238938}
-  m_LocalRotation: {x: 0.21856946, y: 0.08429708, z: -0.018955747, w: 0.97198874}
+  m_LocalRotation: {x: 0.21856944, y: 0.08429708, z: -0.018955745, w: 0.97198874}
   m_LocalPosition: {x: 6.73, y: 6.15, z: -51.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4569,7 +4575,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276942829}
-  m_LocalRotation: {x: 0.16350904, y: 0.4726377, z: -0.089726076, w: 0.86129415}
+  m_LocalRotation: {x: 0.16350903, y: 0.4726377, z: -0.08972607, w: 0.86129415}
   m_LocalPosition: {x: -7.8040714, y: -17.048092, z: -7.6428223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6815,6 +6821,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5578397956537916423, guid: 1b8f79f0bdf1d0f40ae730a7006c7854,
+        type: 3}
+      propertyPath: m_DefaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a31dae1d4f048e4da8ed2c891b31940,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b8f79f0bdf1d0f40ae730a7006c7854, type: 3}
 --- !u!1001 &6147532621056647230
