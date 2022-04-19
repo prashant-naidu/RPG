@@ -1,4 +1,5 @@
 ﻿using RPG.Core;
+using RPG.Saving;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour, IAction
+    public class Mover : MonoBehaviour, IAction, ISaveable
     {
         [Header("Dependencies")]
         [SerializeField] private ActionScheduler m_ActionScheduler;
@@ -47,6 +48,20 @@ namespace RPG.Movement
             float speed = transform.InverseTransformDirection(velocity).z;
 
             m_Animator.SetFloat("forwardSpeed", speed);
+        }
+
+        public object CaptureState()
+        {
+            return new SerializableVector3(transform.position);
+        }
+
+        public void RestoreState(object state)
+        {
+            SerializableVector3 position = (SerializableVector3)state;
+            m_NavMeshAgent.enabled = false;
+            transform.position = position.GetVector();
+            m_NavMeshAgent.enabled = true;
+            m_ActionScheduler.CancelCurrentAction();
         }
     }
 }
