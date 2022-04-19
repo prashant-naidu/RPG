@@ -11,17 +11,32 @@ namespace RPG.Saving
 
         const string defaultSaveFile = "save";
 
+        private void Start()
+        {
+            Load();
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
-                m_SavingSystem.Save(defaultSaveFile);
+                Save();
             }
 
             if (Input.GetKeyDown(KeyCode.L))
             {
-                m_SavingSystem.Load(defaultSaveFile);
+                Load();
             }
+        }
+
+        public void Save()
+        {
+            m_SavingSystem.Save(defaultSaveFile);
+        }
+
+        public void Load()
+        {
+            m_SavingSystem.Load(defaultSaveFile);
         }
     }
 }
