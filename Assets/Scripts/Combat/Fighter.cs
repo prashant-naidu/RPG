@@ -19,9 +19,7 @@ namespace RPG.Combat
         [SerializeField] private Weapon m_Weapon = null;
 
         [Header("Parameters")]
-        public float WeaponRange = 2f;
         public float TimeBetweenAttacks = 1f;
-        public float WeaponDamage = 5f;
 
         private Health m_Target;
         private float m_TimeSinceLastAttack = Mathf.Infinity;
@@ -38,7 +36,7 @@ namespace RPG.Combat
             if (m_Target == null) return;
             if (m_Target.IsDead) return;
 
-            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < WeaponRange;
+            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < m_Weapon.Range;
 
             if (!isInRange)
             {
@@ -75,7 +73,7 @@ namespace RPG.Combat
         // Animation Event
         private void Hit()
         {
-            m_Target?.TakeDamage(WeaponDamage);
+            m_Target?.TakeDamage(m_Weapon.Damage);
         }
 
         public bool CanAttack(GameObject combatTarget)
