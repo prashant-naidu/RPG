@@ -9,6 +9,7 @@ namespace RPG.Saving
     class SaveableEntity : MonoBehaviour
     {
         [SerializeField] private string m_Id = "";
+        public string Id { get { return m_Id; } }
 
 #if UNITY_EDITOR
         private void Update()
@@ -26,11 +27,6 @@ namespace RPG.Saving
             }
         }
 #endif
-
-        public string GetUniqueIdentifier()
-        {
-            return m_Id;
-        }
 
         public object CaptureState()
         {
