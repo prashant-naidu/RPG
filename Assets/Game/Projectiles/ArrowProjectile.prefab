@@ -191,6 +191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 20
+  m_IsHoming: 1
+  m_HitEffect: {fileID: 8910605803680447394, guid: 51eeb41601daf0748a989c4bb2389d31,
+    type: 3}
 --- !u!65 &7435192694942363646
 BoxCollider:
   m_ObjectHideFlags: 0
