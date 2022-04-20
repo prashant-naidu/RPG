@@ -4806,6 +4806,8 @@ MonoBehaviour:
   m_IsHoming: 1
   m_HitEffect: {fileID: 2302457091093092515, guid: 69d1b1037536b504884c93bb73d662db,
     type: 3}
+  m_DestroyOnHit:
+  - {fileID: 1532746452142262206}
 --- !u!65 &7435192694942363646
 BoxCollider:
   m_ObjectHideFlags: 0
