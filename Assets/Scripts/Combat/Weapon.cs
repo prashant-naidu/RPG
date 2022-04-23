@@ -39,6 +39,14 @@ namespace RPG.Combat
             {
                 animator.runtimeAnimatorController = m_WeaponAnimatorOverrideController;
             }
+            else
+            {
+                var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+                if (overrideController != null)
+                {
+                    animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
+                }
+            }
         }
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
