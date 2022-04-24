@@ -19,6 +19,7 @@ namespace RPG.Combat
         [SerializeField] private Transform m_LeftHandTransform = null;
         [SerializeField] private Weapon m_DefaultWeapon = null;
         [SerializeField] private Weapon m_CurrentWeapon = null;
+        [SerializeField] private string m_DefaultWeaponName = "Unarmed";
 
         [Header("Parameters")]
         public float TimeBetweenAttacks = 1f;
@@ -28,7 +29,8 @@ namespace RPG.Combat
 
         private void Start()
         {
-            EquipWeapon(m_DefaultWeapon);
+            Weapon weapon = Resources.Load<Weapon>(m_DefaultWeaponName);
+            EquipWeapon(weapon);
         }
 
         private void Update()
