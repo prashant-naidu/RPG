@@ -13,7 +13,7 @@ namespace RPG.Combat
 
         private void Update()
         {
-            string textToDisplay = m_PlayerFighter.Target != null ? m_PlayerFighter.Target.GetPercentage() + "%" : "No target";
+            string textToDisplay = m_PlayerFighter.Target != null ? string.Format("{0:0}%", m_PlayerFighter.Target.GetPercentage()) : "No target";
             m_HealthValueText.text = textToDisplay;
         }
     }

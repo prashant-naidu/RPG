@@ -15,7 +15,7 @@ namespace RPG.Attributes
 
         private void Update()
         {
-            m_ValueText.text = string.Format("{0:0}", m_PlayerExperience.ExperiencePoints);
+            m_ValueText.text = string.Format("{0}", m_PlayerExperience.ExperiencePoints);
         }
     }
 }
