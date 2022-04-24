@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 1972564694981589872}
   m_ActionScheduler: {fileID: 2418929455436153818}
+  m_BaseStats: {fileID: 846901595057562562}
   m_Health: 100
 --- !u!114 &6712335474456015076
 MonoBehaviour:

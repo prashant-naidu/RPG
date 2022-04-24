@@ -29,6 +29,11 @@ namespace RPG.Attributes
             m_Health = GetComponent<BaseStats>().GetHealth();
         }
 
+        public float GetPercentage()
+        {
+            return (m_Health / m_BaseStats.GetHealth()) * 100f;
+        }
+
         public void TakeDamage(float damage)
         {
             m_Health = Mathf.Max(m_Health - damage, 0f);
