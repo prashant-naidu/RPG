@@ -13,7 +13,7 @@ namespace RPG.Stats
 
         public float GetHealth()
         {
-            return 0;
+            return m_Progression.GetHealth(m_CharacterClass, m_StartingLevel);
         }
     }
 }
