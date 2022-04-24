@@ -57,4 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61bf79a207bb43418dd1f95679472ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: bff49c6ee95ca9c4abe1f6c93901d136, type: 2}
+  m_Weapon: {fileID: 0}
+  m_RespawnTime: 5
+  m_Collider: {fileID: 4743347009201528184}
+  m_ModelGO: {fileID: 0}

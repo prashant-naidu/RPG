@@ -73,6 +73,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1b2869fd7f18e7a419219a151de519aa,
         type: 2}
+    - target: {fileID: 3328051247430194915, guid: 2523f28d8eee6ad43b4556536bf76cab,
+        type: 3}
+      propertyPath: m_ModelGO
+      value: 
+      objectReference: {fileID: 3561468767272569862}
+    - target: {fileID: 3328051247430194915, guid: 2523f28d8eee6ad43b4556536bf76cab,
+        type: 3}
+      propertyPath: m_Weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b2869fd7f18e7a419219a151de519aa,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2523f28d8eee6ad43b4556536bf76cab, type: 3}
 --- !u!4 &6299917692366629214 stripped
@@ -138,3 +149,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626f1b816ba1ee64a9f7cea6ceb529cd, type: 3}
+--- !u!1 &3561468767272569862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 199514, guid: 626f1b816ba1ee64a9f7cea6ceb529cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3561468767272503132}
+  m_PrefabAsset: {fileID: 0}
