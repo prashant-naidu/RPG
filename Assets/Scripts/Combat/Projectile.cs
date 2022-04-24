@@ -11,6 +11,7 @@ namespace RPG.Combat
         [SerializeField] private GameObject[] m_DestroyOnHit = null;
 
         private Health m_Target = null;
+        private GameObject m_Instigator = null;
         private float m_Damage = 0f;
 
         private const float m_MaxLifeTime = 10;
@@ -33,9 +34,10 @@ namespace RPG.Combat
             }
         }
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget(Health target, GameObject instigator, float damage)
         {
             m_Target = target;
+            m_Instigator = instigator;
             m_Damage = damage;
 
             Destroy(gameObject, m_MaxLifeTime);
@@ -56,7 +58,7 @@ namespace RPG.Combat
             if (other.GetComponent<Health>() != m_Target) return;
             if (m_Target.IsDead) return;
 
-            m_Target.TakeDamage(m_Damage);
+            m_Target.TakeDamage(m_Instigator, m_Damage);
             m_Speed = 0f;
 
             if (m_HitEffect != null)

@@ -1,6 +1,7 @@
 ﻿using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
+using System;
 using UnityEngine;
 
 namespace RPG.Attributes
@@ -34,12 +35,22 @@ namespace RPG.Attributes
             return (m_Health / m_BaseStats.GetHealth()) * 100f;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(GameObject instigator, float damage)
         {
             m_Health = Mathf.Max(m_Health - damage, 0f);
             if (m_Health == 0)
             {
                 Die();
+                AwardExperience(instigator);
+            }
+        }
+
+        private void AwardExperience(GameObject instigator)
+        {
+            Experience experience = instigator.GetComponent<Experience>();
+            if (experience != null)
+            {
+                experience.GainExperience(m_BaseStats.GetExperienceReward());
             }
         }
 

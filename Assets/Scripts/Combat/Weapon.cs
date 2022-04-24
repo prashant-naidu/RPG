@@ -48,10 +48,10 @@ namespace RPG.Combat
             return weaponGO;
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
         {
             Projectile projectileInstance = Instantiate(m_Projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, m_Damage);
+            projectileInstance.SetTarget(target, instigator, m_Damage);
         }
 
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)
