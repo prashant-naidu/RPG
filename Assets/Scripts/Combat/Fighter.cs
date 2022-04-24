@@ -23,9 +23,10 @@ namespace RPG.Combat
 
         [Header("Parameters")]
         public float TimeBetweenAttacks = 1f;
-
-        private Health m_Target;
+        
         private float m_TimeSinceLastAttack = Mathf.Infinity;
+        private Health m_Target;
+        public Health Target { get { return m_Target; } }
 
         private void Start()
         {
