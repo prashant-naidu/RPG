@@ -1,7 +1,4 @@
-﻿using RPG.Core;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using RPG.Attributes;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -26,13 +23,13 @@ namespace RPG.Combat
 
         private const string weaponName = "Weapon";
 
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        public GameObject Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
-            DestroyOldWeapon(rightHand, leftHand);
+            GameObject weaponGO = null;
 
             if (m_EquippedPrefab != null)
             {
-                GameObject weaponGO = Instantiate(m_EquippedPrefab, GetHandTransform(rightHand, leftHand));
+                weaponGO = Instantiate(m_EquippedPrefab, GetHandTransform(rightHand, leftHand));
                 weaponGO.name = weaponName;
             }
             if (m_WeaponAnimatorOverrideController != null)
@@ -47,25 +44,14 @@ namespace RPG.Combat
                     animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
                 }
             }
+
+            return weaponGO;
         }
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
         {
             Projectile projectileInstance = Instantiate(m_Projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
             projectileInstance.SetTarget(target, m_Damage);
-        }
-
-        private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
-        {
-            Transform oldWeapon = rightHand.Find(weaponName);
-            if (oldWeapon == null)
-            {
-                oldWeapon = leftHand.Find(weaponName);
-            }
-            if (oldWeapon == null) return;
-
-            oldWeapon.name = "DESTROYING";
-            Destroy(oldWeapon.gameObject);
         }
 
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)

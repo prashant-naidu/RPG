@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6378370562394604551}
   - component: {fileID: 2418929455436153818}
   - component: {fileID: 6493227818098774576}
+  - component: {fileID: 846901595057562562}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -163,7 +164,8 @@ MonoBehaviour:
   m_ActionScheduler: {fileID: 2418929455436153818}
   m_Mover: {fileID: 6378370562394604551}
   m_Animator: {fileID: 1972564694981589872}
-  m_HandTransform: {fileID: 0}
+  m_RightHandTransform: {fileID: 0}
+  m_LeftHandTransform: {fileID: 0}
   m_DefaultWeapon: {fileID: 0}
   m_CurrentWeapon: {fileID: 0}
   TimeBetweenAttacks: 1
@@ -208,3 +210,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Id: 
+--- !u!114 &846901595057562562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316615393710142955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180bd6096faa4b9458fdead80e2f3796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingLevel: 1
+  m_CharacterClass: 1
+  m_Progression: {fileID: 11400000, guid: f1ddd53ec7f958c4685f4644952e968b, type: 2}

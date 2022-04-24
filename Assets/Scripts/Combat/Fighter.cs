@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
-using System;
 using RPG.Saving;
+using RPG.Attributes;
 
 namespace RPG.Combat
 {
@@ -20,6 +18,8 @@ namespace RPG.Combat
         [SerializeField] private Transform m_LeftHandTransform = null;
         [SerializeField] private Weapon m_DefaultWeapon = null;
         [SerializeField] private Weapon m_CurrentWeapon = null;
+
+        private GameObject m_CurrentWeaponGO = null;
 
         [Header("Parameters")]
         public float TimeBetweenAttacks = 1f;
@@ -57,8 +57,13 @@ namespace RPG.Combat
 
         public void EquipWeapon(Weapon weapon)
         {
+            if (m_CurrentWeaponGO != null)
+            {
+                Destroy(m_CurrentWeaponGO);
+            }
+
             m_CurrentWeapon = weapon;
-            m_CurrentWeapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
+            m_CurrentWeaponGO = m_CurrentWeapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
         }
 
         private void AttackBehaviour()

@@ -1,15 +1,16 @@
-﻿using RPG.Saving;
-using System.Collections;
-using System.Collections.Generic;
+﻿using RPG.Core;
+using RPG.Saving;
+using RPG.Stats;
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
         [Header("Dependencies")]
         [SerializeField] private Animator m_Animator;
         [SerializeField] private ActionScheduler m_ActionScheduler;
+        [SerializeField] private BaseStats m_BaseStats;
         
         [Header("Parameters")]
         [SerializeField] private float m_Health = 100f;
@@ -21,6 +22,11 @@ namespace RPG.Core
             {
                 return m_IsDead;
             }
+        }
+
+        private void Start()
+        {
+            m_Health = GetComponent<BaseStats>().GetHealth();
         }
 
         public void TakeDamage(float damage)
