@@ -4,10 +4,11 @@ using RPG.Core;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Stats;
+using System.Collections.Generic;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [Header("Dependencies")]
         [SerializeField] private ActionScheduler m_ActionScheduler;
@@ -129,6 +130,14 @@ namespace RPG.Combat
         {
             m_Animator.ResetTrigger("attack");
             m_Animator.SetTrigger("stopAttack");
+        }
+
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return m_CurrentWeapon.Damage;
+            }
         }
 
         public object CaptureState()
