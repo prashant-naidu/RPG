@@ -132,14 +132,6 @@ namespace RPG.Combat
             m_Animator.SetTrigger("stopAttack");
         }
 
-        public IEnumerable<float> GetAdditiveModifier(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return m_CurrentWeapon.Damage;
-            }
-        }
-
         public object CaptureState()
         {
             return m_CurrentWeapon.name;
@@ -149,6 +141,22 @@ namespace RPG.Combat
         {
             Weapon weapon = Resources.Load<Weapon>((string)state);
             EquipWeapon(weapon);
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return m_CurrentWeapon.Damage;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return m_CurrentWeapon.PercentageBonus;
+            }
         }
     }
 }

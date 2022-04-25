@@ -14,6 +14,9 @@ namespace RPG.Combat
         [SerializeField] private float m_Damage = 5f;
         public float Damage { get { return m_Damage; } }
 
+        [SerializeField] private float m_PercentageBonus = 0;
+        public float PercentageBonus { get { return m_PercentageBonus; } }
+
         [SerializeField] private float m_Range = 2f;
         public float Range { get { return m_Range; } }
 
