@@ -16,6 +16,8 @@ namespace RPG.Attributes
         [SerializeField] private CapsuleCollider m_Collider;
 
         private float m_HealthPoints = -1f;
+        public float HealthPoints { get { return m_HealthPoints; } }
+
         private bool m_IsDead = false;
         public bool IsDead
         {
@@ -25,8 +27,14 @@ namespace RPG.Attributes
             }
         }
 
+        public float MaxHealthPoints { get { return m_BaseStats.GetStat(Stat.Health); } }
+
+        private const float m_RegenerationPercentage = 70f;
+
         private void Start()
         {
+            m_BaseStats.OnLevelUp += RegenerateHealth;
+
             if (m_HealthPoints < 0)
             {
                 m_HealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
@@ -45,12 +53,19 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, float damage)
         {
+            print(gameObject.name + " took damage: " + damage);
+
             m_HealthPoints = Mathf.Max(m_HealthPoints - damage, 0f);
             if (m_HealthPoints == 0)
             {
                 Die();
                 AwardExperience(instigator);
             }
+        }
+
+        private void RegenerateHealth()
+        {
+            m_HealthPoints = Mathf.Max(m_HealthPoints, m_BaseStats.GetStat(Stat.Health) * (m_RegenerationPercentage / 100f));
         }
 
         private void AwardExperience(GameObject instigator)

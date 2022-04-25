@@ -251,6 +251,11 @@ PrefabInstance:
       propertyPath: m_RightHandTransform
       value: 
       objectReference: {fileID: 1504038743463892865}
+    - target: {fileID: 6712335474456015076, guid: 73774626da4607a469c732c0fd85dc28,
+        type: 3}
+      propertyPath: m_BaseStats
+      value: 
+      objectReference: {fileID: 5236512624327727216}
     - target: {fileID: 6493227818098774576, guid: 73774626da4607a469c732c0fd85dc28,
         type: 3}
       propertyPath: m_Id
@@ -271,6 +276,12 @@ PrefabInstance:
       propertyPath: m_Experience
       value: 
       objectReference: {fileID: 9003183206439339005}
+    - target: {fileID: 846901595057562562, guid: 73774626da4607a469c732c0fd85dc28,
+        type: 3}
+      propertyPath: m_LevelUpEffectPrefabReference
+      value: 
+      objectReference: {fileID: 3259257445303615901, guid: 13de389e660a354449b5ef92d6dafce5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73774626da4607a469c732c0fd85dc28, type: 3}
 --- !u!1 &7885210170925928025 stripped
@@ -319,5 +330,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ccb46d08b19ebe4bb28d9c10d4a5728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5236512624327727216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 846901595057562562, guid: 73774626da4607a469c732c0fd85dc28,
+    type: 3}
+  m_PrefabInstance: {fileID: 4858004109497285554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7885210170925928025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180bd6096faa4b9458fdead80e2f3796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

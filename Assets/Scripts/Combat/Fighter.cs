@@ -3,6 +3,7 @@ using RPG.Movement;
 using RPG.Core;
 using RPG.Saving;
 using RPG.Attributes;
+using RPG.Stats;
 
 namespace RPG.Combat
 {
@@ -12,6 +13,7 @@ namespace RPG.Combat
         [SerializeField] private ActionScheduler m_ActionScheduler;
         [SerializeField] private Mover m_Mover;
         [SerializeField] private Animator m_Animator;
+        [SerializeField] private BaseStats m_BaseStats;
 
         [Header("Other")]
         [SerializeField] private Transform m_RightHandTransform = null;
@@ -84,13 +86,15 @@ namespace RPG.Combat
         private void Hit()
         {
             if (m_Target == null) return;
+
+            float damage = m_BaseStats.GetStat(Stat.Damage);
             if (m_CurrentWeapon.HasProjectile)
             {
-                m_CurrentWeapon.LaunchProjectile(m_RightHandTransform, m_LeftHandTransform, m_Target, gameObject);
+                m_CurrentWeapon.LaunchProjectile(m_RightHandTransform, m_LeftHandTransform, m_Target, gameObject, damage);
             }
             else
             {
-                m_Target.TakeDamage(gameObject, m_CurrentWeapon.Damage);
+                m_Target.TakeDamage(gameObject, damage);
             }
         }
 
