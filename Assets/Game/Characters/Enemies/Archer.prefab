@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1642635102414750344, guid: 80bbfeb2cdab3f44a913dbf4eea8fd35,
+        type: 3}
+      propertyPath: m_Collider
+      value: 
+      objectReference: {fileID: 2516167727834482268}
     - target: {fileID: 4068981031138486393, guid: 80bbfeb2cdab3f44a913dbf4eea8fd35,
         type: 3}
       propertyPath: m_DefaultWeapon
@@ -90,3 +95,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80bbfeb2cdab3f44a913dbf4eea8fd35, type: 3}
+--- !u!136 &2516167727834482268 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 30755681458216494, guid: 80bbfeb2cdab3f44a913dbf4eea8fd35,
+    type: 3}
+  m_PrefabInstance: {fileID: 2487813379771865202}
+  m_PrefabAsset: {fileID: 0}

@@ -128,6 +128,11 @@ PrefabInstance:
       propertyPath: m_Health
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 8330290215218256405, guid: 73774626da4607a469c732c0fd85dc28,
+        type: 3}
+      propertyPath: m_Collider
+      value: 
+      objectReference: {fileID: 30755681458216494}
     - target: {fileID: 4982450296713155695, guid: 73774626da4607a469c732c0fd85dc28,
         type: 3}
       propertyPath: m_Speed

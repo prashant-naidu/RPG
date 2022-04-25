@@ -12,6 +12,9 @@ namespace RPG.Attributes
         [SerializeField] private ActionScheduler m_ActionScheduler;
         [SerializeField] private BaseStats m_BaseStats;
 
+        [Header("Other")]
+        [SerializeField] private CapsuleCollider m_Collider;
+
         private float m_HealthPoints = -1f;
         private bool m_IsDead = false;
         public bool IsDead
@@ -28,6 +31,11 @@ namespace RPG.Attributes
             {
                 m_HealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
             }
+        }
+
+        private void Update()
+        {
+            m_Collider.enabled = !m_IsDead;
         }
 
         public float GetPercentage()
