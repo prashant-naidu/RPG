@@ -14,14 +14,13 @@ namespace RPG.Stats
 
         private int m_CurrentLevel = 0;
 
-        private void Awake()
-        {
-            m_Experience.OnExperienceGained += UpdateLevel;
-        }
-
         private void Start()
         {
             m_CurrentLevel = CalculateLevel();
+            if (m_Experience != null)
+            {
+                m_Experience.OnExperienceGained += UpdateLevel;
+            }
         }
 
         private void UpdateLevel()
@@ -41,6 +40,10 @@ namespace RPG.Stats
 
         public int GetLevel()
         {
+            if (m_CurrentLevel < 1)
+            {
+                m_CurrentLevel = CalculateLevel();
+            }
             return m_CurrentLevel;
         }
 
