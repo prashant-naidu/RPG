@@ -1,7 +1,6 @@
 ﻿using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
-using System;
 using UnityEngine;
 
 namespace RPG.Attributes
@@ -12,10 +11,8 @@ namespace RPG.Attributes
         [SerializeField] private Animator m_Animator;
         [SerializeField] private ActionScheduler m_ActionScheduler;
         [SerializeField] private BaseStats m_BaseStats;
-        
-        [Header("Parameters")]
-        [SerializeField] private float m_Health = 100f;
 
+        private float m_HealthPoints = -1f;
         private bool m_IsDead = false;
         public bool IsDead
         {
@@ -27,18 +24,21 @@ namespace RPG.Attributes
 
         private void Start()
         {
-            m_Health = GetComponent<BaseStats>().GetStat(Stat.Health);
+            if (m_HealthPoints < 0)
+            {
+                m_HealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+            }
         }
 
         public float GetPercentage()
         {
-            return (m_Health / m_BaseStats.GetStat(Stat.Health)) * 100f;
+            return (m_HealthPoints / m_BaseStats.GetStat(Stat.Health)) * 100f;
         }
 
         public void TakeDamage(GameObject instigator, float damage)
         {
-            m_Health = Mathf.Max(m_Health - damage, 0f);
-            if (m_Health == 0)
+            m_HealthPoints = Mathf.Max(m_HealthPoints - damage, 0f);
+            if (m_HealthPoints == 0)
             {
                 Die();
                 AwardExperience(instigator);
@@ -66,14 +66,14 @@ namespace RPG.Attributes
 
         public object CaptureState()
         {
-            return m_Health;
+            return m_HealthPoints;
         }
 
         public void RestoreState(object state)
         {
-            m_Health = (float)state;
+            m_HealthPoints = (float)state;
 
-            if (m_Health <= 0)
+            if (m_HealthPoints <= 0)
             {
                 Die();
             }
