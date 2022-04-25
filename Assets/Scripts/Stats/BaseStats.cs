@@ -12,12 +12,39 @@ namespace RPG.Stats
         [SerializeField] private Progression m_Progression = null;
         [SerializeField] private Experience m_Experience = null;
 
+        private int m_CurrentLevel = 0;
+
+        private void Awake()
+        {
+            m_Experience.OnExperienceGained += UpdateLevel;
+        }
+
+        private void Start()
+        {
+            m_CurrentLevel = CalculateLevel();
+        }
+
+        private void UpdateLevel()
+        {
+            int newLevel = CalculateLevel();
+            if (newLevel > m_CurrentLevel)
+            {
+                m_CurrentLevel = newLevel;
+                print("Levelled Up!");
+            }
+        }
+
         public float GetStat(Stat stat)
         {
             return m_Progression.GetStat(stat, m_CharacterClass, GetLevel());
         }
 
         public int GetLevel()
+        {
+            return m_CurrentLevel;
+        }
+
+        public int CalculateLevel()
         {
             if (m_Experience == null) return m_StartingLevel;
 
