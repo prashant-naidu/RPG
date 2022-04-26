@@ -13,7 +13,8 @@ namespace RPG.Control
         {
             None,
             Movement,
-            Combat
+            Combat,
+            UI
         }
         
         [Serializable]
@@ -35,7 +36,11 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
-            if (InteractWithUI()) return;
+            if (InteractWithUI())
+            {
+                SetCursor(CursorType.UI);
+                return;
+            }
 
             if (m_Health.IsDead)
             {
