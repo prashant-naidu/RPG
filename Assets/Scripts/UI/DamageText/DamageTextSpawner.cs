@@ -12,7 +12,7 @@ namespace RPG.UI.DamageText
         public void Spawn(float damageTaken)
         {
             DamageText instance = Instantiate(m_DamageTextPrefabReference, transform);
-            instance.Text = damageTaken.ToString();
+            instance.SetText(damageTaken);
         }
     }
 }

@@ -8,16 +8,10 @@ namespace RPG.UI.DamageText
     public class DamageText : MonoBehaviour
     {
         [SerializeField] private Text m_Text = null;
-        public string Text
+        
+        public void SetText(float value)
         {
-            get
-            {
-                return m_Text.text;
-            }
-            set
-            {
-                m_Text.text = value;
-            }
+            m_Text.text = string.Format("{0:0}", value);
         }
 
         public void DestroyText()

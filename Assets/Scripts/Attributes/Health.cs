@@ -16,7 +16,10 @@ namespace RPG.Attributes
 
         [Header("Other")]
         [SerializeField] private CapsuleCollider m_Collider;
-        [SerializeField] private UnityEvent m_OnTakeDamage;
+        [SerializeField] private TakeDamageEvent m_OnTakeDamage;
+
+        [System.Serializable]
+        public class TakeDamageEvent : UnityEvent<float> { }
 
         private LazyValue<float> m_HealthPoints;
         public float HealthPoints { get { return m_HealthPoints.value; } }
@@ -81,7 +84,7 @@ namespace RPG.Attributes
             }
             else
             {
-                m_OnTakeDamage.Invoke();
+                m_OnTakeDamage.Invoke(damage);
             }
         }
 
