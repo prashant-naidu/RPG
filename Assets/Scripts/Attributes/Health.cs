@@ -3,6 +3,7 @@ using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
@@ -15,6 +16,7 @@ namespace RPG.Attributes
 
         [Header("Other")]
         [SerializeField] private CapsuleCollider m_Collider;
+        [SerializeField] private UnityEvent m_OnTakeDamage;
 
         private LazyValue<float> m_HealthPoints;
         public float HealthPoints { get { return m_HealthPoints.value; } }
@@ -76,6 +78,10 @@ namespace RPG.Attributes
             {
                 Die();
                 AwardExperience(instigator);
+            }
+            else
+            {
+                m_OnTakeDamage.Invoke();
             }
         }
 
