@@ -4,6 +4,7 @@ using RPG.Combat;
 using RPG.Attributes;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 namespace RPG.Control
 {
@@ -24,6 +25,9 @@ namespace RPG.Control
         [SerializeField] private Mover m_Mover;
         [SerializeField] private Fighter m_Fighter;
         [SerializeField] private Health m_Health;
+
+        [Header("Parameters")]
+        [SerializeField] private float m_MaxNavMeshProjectionDistance = 1f;
 
         // Update is called once per frame
         void Update()
@@ -83,17 +87,40 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-            RaycastHit hit;
-            if (Physics.Raycast(GetMouseRay(), out hit))
+            //RaycastHit hit;
+            //bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+
+            Vector3 targetPosition;
+            bool hasHit = RaycastNavMesh(out targetPosition);
+
+            if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    m_Mover.StartMoveAction(hit.point, 1f);
+                    m_Mover.StartMoveAction(targetPosition, 1f);
                 }
                 SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private bool RaycastNavMesh(out Vector3 targetPosition)
+        {
+            targetPosition = new Vector3();
+
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+
+            if (!hasHit) return false;
+
+            NavMeshHit navMeshHit;
+            bool hasCastToNavMesh = NavMesh.SamplePosition(hit.point, out navMeshHit, m_MaxNavMeshProjectionDistance, NavMesh.AllAreas);
+
+            if (!hasCastToNavMesh) return false;
+
+            targetPosition = navMeshHit.position;
+            return true;
         }
 
         private void SetCursor(CursorType type)
