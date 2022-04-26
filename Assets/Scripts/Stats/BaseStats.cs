@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameDevTV.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,13 +16,24 @@ namespace RPG.Stats
         [SerializeField] private GameObject m_LevelUpEffectPrefabReference = null;
         [SerializeField] private bool m_ShouldUseModifiers = false;
 
-        private int m_CurrentLevel = 0;
+        private LazyValue<int> m_CurrentLevel;
+        public int Level { get { return m_CurrentLevel.value; } }
 
         public event Action OnLevelUp;
 
+        private void Awake()
+        {
+            m_CurrentLevel = new LazyValue<int>(GetInitialLevel);
+        }
+
+        private int GetInitialLevel()
+        {
+            return CalculateLevel();
+        }
+
         private void Start()
         {
-            m_CurrentLevel = CalculateLevel();
+            m_CurrentLevel.ForceInit();
         }
 
         private void OnEnable()
@@ -43,9 +55,9 @@ namespace RPG.Stats
         private void UpdateLevel()
         {
             int newLevel = CalculateLevel();
-            if (newLevel > m_CurrentLevel)
+            if (newLevel > m_CurrentLevel.value)
             {
-                m_CurrentLevel = newLevel;
+                m_CurrentLevel.value = newLevel;
                 LevelUpEffect();
                 OnLevelUp();
             }
@@ -58,18 +70,9 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
-            float baseStat = m_Progression.GetStat(stat, m_CharacterClass, GetLevel());
+            float baseStat = m_Progression.GetStat(stat, m_CharacterClass, m_CurrentLevel.value);
 
             return (baseStat + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat)/100f);
-        }
-
-        public int GetLevel()
-        {
-            if (m_CurrentLevel < 1)
-            {
-                m_CurrentLevel = CalculateLevel();
-            }
-            return m_CurrentLevel;
         }
 
         private float GetAdditiveModifier(Stat stat)

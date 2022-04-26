@@ -1,7 +1,9 @@
-﻿using RPG.Attributes;
+﻿using GameDevTV.Utils;
+using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using System;
 using UnityEngine;
 
 namespace RPG.Control
@@ -23,7 +25,7 @@ namespace RPG.Control
         public float SuspicionTime = 4f;
 
         private GameObject m_PlayerGO;
-        private Vector3 m_GuardPosition;
+        private LazyValue<Vector3> m_GuardPosition;
         private float m_TimeSincePlayerLastSeen = Mathf.Infinity;
         private float m_TimeSinceArrivedAtWaypoint = Mathf.Infinity;
         private float m_WaypointTolerance = 1f;
@@ -34,11 +36,17 @@ namespace RPG.Control
         private void Awake()
         {
             m_PlayerGO = GameObject.FindGameObjectWithTag("Player");
+            m_GuardPosition = new LazyValue<Vector3>(GetInitialGuardPosition);
+        }
+
+        private Vector3 GetInitialGuardPosition()
+        {
+            return transform.position;
         }
 
         private void Start()
         {
-            m_GuardPosition = transform.position;
+            m_GuardPosition.ForceInit();
         }
 
         private void Update()
@@ -80,7 +88,7 @@ namespace RPG.Control
 
         private void PatrolBehaviour()
         {
-            Vector3 nextPosition = m_GuardPosition;
+            Vector3 nextPosition = m_GuardPosition.value;
 
             if (m_PatrolPath != null)
             {
