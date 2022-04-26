@@ -69,7 +69,12 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return (m_HealthPoints.value / m_BaseStats.GetStat(Stat.Health)) * 100f;
+            return GetFraction() * 100f;
+        }
+
+        public float GetFraction()
+        {
+            return m_HealthPoints.value / m_BaseStats.GetStat(Stat.Health);
         }
 
         public void TakeDamage(GameObject instigator, float damage)
