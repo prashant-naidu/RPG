@@ -16,7 +16,8 @@ MonoBehaviour:
     type: 3}
   m_WeaponAnimatorOverrideController: {fileID: 22100000, guid: 28817b354c6004f4b9598f829a98a390,
     type: 2}
-  m_Damage: 8
+  m_Damage: 0
+  m_PercentageBonus: 20
   m_Range: 20
   m_IsRightHanded: 0
   m_Projectile: {fileID: 7971852116271500403, guid: 40d662ec5f4d9fe4cb09e0d7a946e888,
