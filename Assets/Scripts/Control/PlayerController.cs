@@ -9,14 +9,6 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        enum CursorType
-        {
-            None,
-            Movement,
-            Combat,
-            UI
-        }
-        
         [Serializable]
         struct CursorMapping
         {
@@ -48,7 +40,7 @@ namespace RPG.Control
                 return;
             }
 
-            if (InteractWithCombat()) return;
+            if (InteractWithComponent()) return;
 
             if (InteractWithMovement()) return;
 
@@ -60,24 +52,33 @@ namespace RPG.Control
             return EventSystem.current.IsPointerOverGameObject();
         }
 
-        private bool InteractWithCombat()
+        private bool InteractWithComponent()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
-
-            foreach (RaycastHit hit in hits)
+            foreach (RaycastHit hit in RaycastAllSorted())
             {
-                GameObject hitGO = hit.transform.gameObject;
-                if (hitGO.tag == "CombatTarget" && m_Fighter.CanAttack(hitGO))
+                foreach(IRaycastable raycastable in hit.transform.GetComponents<IRaycastable>())
                 {
-                    if (Input.GetMouseButton(0))
+                    if (raycastable.HandleRaycast(this))
                     {
-                        m_Fighter.Attack(hitGO);
+                        SetCursor(raycastable.GetCursorType());
+                        return true;
                     }
-                    SetCursor(CursorType.Combat);
-                    return true;
                 }
             }
             return false;
+        }
+
+        private RaycastHit[] RaycastAllSorted()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            float[] distances = new float[hits.Length];
+            for (int i = 0; i < hits.Length; i++)
+            {
+                distances[i] = hits[i].distance;
+            }
+            Array.Sort(distances, hits);
+
+            return hits;
         }
 
         private bool InteractWithMovement()
