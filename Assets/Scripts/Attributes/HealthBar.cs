@@ -14,7 +14,13 @@ namespace RPG.Attributes
         {
             float fraction = m_Health.GetFraction();
 
-            m_Canvas.enabled = fraction > 0 && fraction < 1;
+            if (Mathf.Approximately(fraction, 0) || Mathf.Approximately(fraction, 1))
+            {
+                m_Canvas.enabled = false;
+                return;
+            }
+
+            m_Canvas.enabled = true;
 
             m_RectTransform.localScale = new Vector3(fraction, 1f, 1f);
         }
