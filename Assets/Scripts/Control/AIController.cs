@@ -34,6 +34,10 @@ namespace RPG.Control
         private void Awake()
         {
             m_PlayerGO = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        private void Start()
+        {
             m_GuardPosition = transform.position;
         }
 

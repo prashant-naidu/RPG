@@ -19,9 +19,11 @@ namespace RPG.SceneManagement
 
         private IEnumerator LoadLastScene()
         {
+            yield return m_SavingSystem.LoadLastScene(defaultSaveFile);
+
+            // Looking for fader after the loadlastscene because fader only exists after savingwrapper awake
             Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
-            yield return m_SavingSystem.LoadLastScene(defaultSaveFile);
             yield return fader.FadeIn(FadeInTime);
         }
 

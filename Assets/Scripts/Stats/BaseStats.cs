@@ -22,9 +22,21 @@ namespace RPG.Stats
         private void Start()
         {
             m_CurrentLevel = CalculateLevel();
+        }
+
+        private void OnEnable()
+        {
             if (m_Experience != null)
             {
                 m_Experience.OnExperienceGained += UpdateLevel;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (m_Experience != null)
+            {
+                m_Experience.OnExperienceGained -= UpdateLevel;
             }
         }
 

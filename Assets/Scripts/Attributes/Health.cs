@@ -33,12 +33,20 @@ namespace RPG.Attributes
 
         private void Start()
         {
-            m_BaseStats.OnLevelUp += RegenerateHealth;
-
             if (m_HealthPoints < 0)
             {
                 m_HealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
             }
+        }
+
+        private void OnEnable()
+        {
+            m_BaseStats.OnLevelUp += RegenerateHealth;
+        }
+
+        private void OnDisable()
+        {
+            m_BaseStats.OnLevelUp -= RegenerateHealth;
         }
 
         private void Update()
