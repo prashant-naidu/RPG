@@ -33,9 +33,14 @@ namespace RPG.Combat
         private Health m_Target;
         public Health Target { get { return m_Target; } }
 
-        private void Awake()
+        public Fighter()
         {
             m_CurrentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+        }
+
+        private void Awake()
+        {
+            //m_CurrentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
         }
 
         private Weapon SetupDefaultWeapon()

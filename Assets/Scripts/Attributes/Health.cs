@@ -37,9 +37,14 @@ namespace RPG.Attributes
 
         private const float m_RegenerationPercentage = 70f;
 
-        private void Awake()
+        public Health()
         {
             m_HealthPoints = new LazyValue<float>(GetInitialHealthPoints);
+        }
+
+        private void Awake()
+        {
+            //m_HealthPoints = new LazyValue<float>(GetInitialHealthPoints);
         }
 
         private float GetInitialHealthPoints()
