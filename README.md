@@ -1,5 +1,7 @@
 # RPG
 
+Unity 2018.3.14f1
+
 A simple RPG with a click-to-move combat implementation.
 
 This project was made during this Udemy course: https://www.udemy.com/course/unityrpg
