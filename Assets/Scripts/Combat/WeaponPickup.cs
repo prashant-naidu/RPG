@@ -14,6 +14,7 @@ namespace RPG.Combat
 
         [SerializeField] private SphereCollider m_Collider = null;
         [SerializeField] private GameObject m_ModelGO = null;
+        [SerializeField] private GameObject m_Light = null;
 
         [Header("Temp Health Hack")]
         [SerializeField] private float m_HealthToRestore = 0;
@@ -51,6 +52,10 @@ namespace RPG.Combat
         {
             m_Collider.enabled = isVisible;
             m_ModelGO.SetActive(isVisible);
+            if (m_Light != null)
+            {
+                m_Light.SetActive(isVisible);
+            }
         }
 
         public bool HandleRaycast(PlayerController callingController)
