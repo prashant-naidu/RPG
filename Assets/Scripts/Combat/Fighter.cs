@@ -109,6 +109,11 @@ namespace RPG.Combat
         {
             if (m_Target == null) return;
 
+            if (m_CurrentWeapon.value != null)
+            {
+                m_CurrentWeapon.value.OnHit();
+            }
+
             float damage = m_BaseStats.GetStat(Stat.Damage);
             if (m_CurrentWeaponConfig.HasProjectile)
             {
