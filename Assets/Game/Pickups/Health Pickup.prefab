@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 3328051247430194915, guid: 2523f28d8eee6ad43b4556536bf76cab,
         type: 3}
       propertyPath: m_HealthToRestore
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2523f28d8eee6ad43b4556536bf76cab, type: 3}
@@ -142,15 +142,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 489180, guid: 626f1b816ba1ee64a9f7cea6ceb529cd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3207
+      value: 1.9327937
       objectReference: {fileID: 0}
     - target: {fileID: 489180, guid: 626f1b816ba1ee64a9f7cea6ceb529cd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3207
+      value: 1.9327937
       objectReference: {fileID: 0}
     - target: {fileID: 489180, guid: 626f1b816ba1ee64a9f7cea6ceb529cd, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.3207
+      value: 1.9327937
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626f1b816ba1ee64a9f7cea6ceb529cd, type: 3}
