@@ -1,4 +1,5 @@
-﻿using RPG.Control;
+﻿using RPG.Attributes;
+using RPG.Control;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,17 +15,28 @@ namespace RPG.Combat
         [SerializeField] private SphereCollider m_Collider = null;
         [SerializeField] private GameObject m_ModelGO = null;
 
+        [Header("Temp Health Hack")]
+        [SerializeField] private float m_HealthToRestore = 0;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
-                DoPickup(other.GetComponent<Fighter>());
+                DoPickup(other.gameObject);
             }
         }
 
-        private void DoPickup(Fighter fighter)
+        private void DoPickup(GameObject subject)
         {
-            fighter.EquipWeapon(m_Weapon);
+            if (m_Weapon != null)
+            {
+                subject.GetComponent<Fighter>().EquipWeapon(m_Weapon);
+            }
+            if (m_HealthToRestore > 0)
+            {
+                subject.GetComponent<Health>().Heal(m_HealthToRestore);
+            }
+            
             StartCoroutine(HideForSeconds(m_RespawnTime));
         }
 
@@ -45,7 +57,7 @@ namespace RPG.Combat
         {
             if (Input.GetMouseButtonDown(0))
             {
-                DoPickup(callingController.GetComponent<Fighter>());
+                DoPickup(callingController.gameObject);
             }
             return true;
         }
