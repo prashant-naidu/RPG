@@ -17,6 +17,7 @@ namespace RPG.Attributes
         [Header("Other")]
         [SerializeField] private CapsuleCollider m_Collider;
         [SerializeField] private TakeDamageEvent m_OnTakeDamage;
+        [SerializeField] private UnityEvent m_OnDie;
 
         [System.Serializable]
         public class TakeDamageEvent : UnityEvent<float> { }
@@ -89,6 +90,7 @@ namespace RPG.Attributes
             m_HealthPoints.value = Mathf.Max(m_HealthPoints.value - damage, 0f);
             if (m_HealthPoints.value == 0)
             {
+                m_OnDie.Invoke();
                 Die();
                 AwardExperience(instigator);
             }
