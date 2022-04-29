@@ -23,8 +23,8 @@ namespace RPG.Combat
         [SerializeField] private Transform m_LeftHandTransform = null;
         [SerializeField] private WeaponConfig m_DefaultWeapon = null;
         
-        private LazyValue<WeaponConfig> m_CurrentWeapon;
-        private GameObject m_CurrentWeaponGO = null;
+        private LazyValue<WeaponConfig> m_CurrentWeaponConfig;
+        private Weapon m_CurrentWeapon = null;
 
         [Header("Parameters")]
         public float TimeBetweenAttacks = 1f;
@@ -35,12 +35,12 @@ namespace RPG.Combat
 
         public Fighter()
         {
-            m_CurrentWeapon = new LazyValue<WeaponConfig>(SetupDefaultWeapon);
+            m_CurrentWeaponConfig = new LazyValue<WeaponConfig>(SetupDefaultWeapon);
         }
 
         private void Awake()
         {
-            //m_CurrentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+            //m_CurrentWeaponConfig = new LazyValue<Weapon>(SetupDefaultWeapon);
         }
 
         private WeaponConfig SetupDefaultWeapon()
@@ -51,7 +51,7 @@ namespace RPG.Combat
 
         private void Start()
         {
-            m_CurrentWeapon.ForceInit();
+            m_CurrentWeaponConfig.ForceInit();
         }
 
         private void Update()
@@ -61,7 +61,7 @@ namespace RPG.Combat
             if (m_Target == null) return;
             if (m_Target.IsDead) return;
 
-            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < m_CurrentWeapon.value.Range;
+            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < m_CurrentWeaponConfig.value.Range;
 
             if (!isInRange)
             {
@@ -76,19 +76,19 @@ namespace RPG.Combat
 
         public void EquipWeapon(WeaponConfig weapon)
         {
-            if (m_CurrentWeaponGO != null)
+            if (m_CurrentWeapon?.gameObject != null)
             {
-                Destroy(m_CurrentWeaponGO);
+                Destroy(m_CurrentWeapon.gameObject);
+                m_CurrentWeapon = null;
             }
 
-            m_CurrentWeapon.value = weapon;
+            m_CurrentWeaponConfig.value = weapon;
             AttachWeapon(weapon);
         }
 
         private void AttachWeapon(WeaponConfig weapon)
         {
-            Weapon instance = weapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
-            m_CurrentWeaponGO = instance != null ? instance.gameObject : null;
+            m_CurrentWeapon = weapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
         }
 
         private void AttackBehaviour()
@@ -110,9 +110,9 @@ namespace RPG.Combat
             if (m_Target == null) return;
 
             float damage = m_BaseStats.GetStat(Stat.Damage);
-            if (m_CurrentWeapon.value.HasProjectile)
+            if (m_CurrentWeaponConfig.value.HasProjectile)
             {
-                m_CurrentWeapon.value.LaunchProjectile(m_RightHandTransform, m_LeftHandTransform, m_Target, gameObject, damage);
+                m_CurrentWeaponConfig.value.LaunchProjectile(m_RightHandTransform, m_LeftHandTransform, m_Target, gameObject, damage);
             }
             else
             {
@@ -155,7 +155,7 @@ namespace RPG.Combat
 
         public object CaptureState()
         {
-            return m_CurrentWeapon.value.name;
+            return m_CurrentWeaponConfig.value.name;
         }
 
         public void RestoreState(object state)
@@ -168,7 +168,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return m_CurrentWeapon.value.Damage;
+                yield return m_CurrentWeaponConfig.value.Damage;
             }
         }
 
@@ -176,7 +176,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return m_CurrentWeapon.value.PercentageBonus;
+                yield return m_CurrentWeaponConfig.value.PercentageBonus;
             }
         }
     }
