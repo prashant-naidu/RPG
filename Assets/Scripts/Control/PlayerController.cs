@@ -28,7 +28,6 @@ namespace RPG.Control
 
         [Header("Parameters")]
         [SerializeField] private float m_MaxNavMeshProjectionDistance = 1f;
-        [SerializeField] private float m_MaxNavPathLength = 40f;
 
         // Update is called once per frame
         void Update()
@@ -88,14 +87,13 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-            //RaycastHit hit;
-            //bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
-
             Vector3 targetPosition;
             bool hasHit = RaycastNavMesh(out targetPosition);
 
             if (hasHit)
             {
+                if (!m_Mover.CanMoveTo(targetPosition)) return false;
+
                 if (Input.GetMouseButton(0))
                 {
                     m_Mover.StartMoveAction(targetPosition, 1f);
@@ -121,31 +119,6 @@ namespace RPG.Control
             if (!hasCastToNavMesh) return false;
 
             targetPosition = navMeshHit.position;
-
-            NavMeshPath path = new NavMeshPath();
-            bool hasPath = NavMesh.CalculatePath(transform.position, targetPosition, NavMesh.AllAreas, path);
-
-            if (!hasPath) return false;
-            if (path.status != NavMeshPathStatus.PathComplete) return false;
-            if (!IsValidNavPathLength(path)) return false;
-
-            return true;
-        }
-
-        private bool IsValidNavPathLength(NavMeshPath path)
-        {
-            float distanceSum = 0f;
-
-            if (path.corners.Length < 2) return true;
-
-            for (int i=0; i < path.corners.Length - 1; i++)
-            {
-                distanceSum += Vector3.Distance(path.corners[i], path.corners[i + 1]);
-                if (distanceSum > m_MaxNavPathLength)
-                {
-                    return false;
-                }
-            }
 
             return true;
         }

@@ -43,11 +43,6 @@ namespace RPG.Attributes
             m_HealthPoints = new LazyValue<float>(GetInitialHealthPoints);
         }
 
-        private void Awake()
-        {
-            //m_HealthPoints = new LazyValue<float>(GetInitialHealthPoints);
-        }
-
         private float GetInitialHealthPoints()
         {
             return m_BaseStats.GetStat(Stat.Health);

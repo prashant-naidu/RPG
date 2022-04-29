@@ -41,7 +41,6 @@ namespace RPG.Combat
         private void Awake()
         {
             m_CurrentWeaponConfig = m_DefaultWeaponConfig;
-            //m_CurrentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
         }
 
         private Weapon SetupDefaultWeapon()
@@ -133,8 +132,8 @@ namespace RPG.Combat
 
         public bool CanAttack(GameObject combatTarget)
         {
-            if (combatTarget == null) { return false; }
-
+            if (combatTarget == null) return false;
+            if (!m_Mover.CanMoveTo(combatTarget.transform.position)) return false;
             Health targetToTest = combatTarget.GetComponent<Health>();
             return !targetToTest.IsDead;
         }

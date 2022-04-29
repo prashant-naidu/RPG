@@ -16,6 +16,7 @@ namespace RPG.Movement
 
         [Header("Parameters")]
         [SerializeField] private float m_MaxSpeed = 5.66f;
+        [SerializeField] private float m_MaxNavPathLength = 40f;
 
         void Update()
         {
@@ -40,6 +41,36 @@ namespace RPG.Movement
         public void Cancel()
         {
             m_NavMeshAgent.isStopped = true;
+        }
+
+        public bool CanMoveTo(Vector3 destination)
+        {
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, path);
+
+            if (!hasPath) return false;
+            if (path.status != NavMeshPathStatus.PathComplete) return false;
+            if (!IsValidNavPathLength(path)) return false;
+
+            return true;
+        }
+
+        private bool IsValidNavPathLength(NavMeshPath path)
+        {
+            float distanceSum = 0f;
+
+            if (path.corners.Length < 2) return true;
+
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                distanceSum += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+                if (distanceSum > m_MaxNavPathLength)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void UpdateAnimator()
