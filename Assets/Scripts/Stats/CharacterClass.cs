@@ -2,6 +2,6 @@
 {
     public enum CharacterClass
     {
-        Player, Grunt, Archer
+        Player, Grunt, Archer, StrongerGrunt
     }
 }

@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 10.460002, y: 4.920001, z: -23.360016}
+  m_FollowOffset: {x: 7.4400015, y: 4.560001, z: -25.830025}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -124,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631851363852230194}
   m_LocalRotation: {x: -0, y: 0.4042245, z: -0, w: 0.9146598}
-  m_LocalPosition: {x: -20.99, y: 3.032, z: -15.66}
+  m_LocalPosition: {x: -21.53, y: 3.032, z: -16.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2631851363945892571}
@@ -369,6 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2631851364139921175}
   - component: {fileID: 2631851364139921168}
+  - component: {fileID: 4842604402820288184}
   m_Layer: 0
   m_Name: CM Reveal1
   m_TagString: Untagged
@@ -383,8 +384,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631851364139921169}
-  m_LocalRotation: {x: 0.08385987, y: -0.5684487, z: 0.0583943, w: 0.8163478}
-  m_LocalPosition: {x: 10.65, y: 4.79, z: -13.52}
+  m_LocalRotation: {x: 0.08887814, y: -0.46435156, z: 0.046902202, w: 0.879931}
+  m_LocalPosition: {x: 7.56, y: 4.41, z: -16.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2631851363825170488}
@@ -428,6 +429,21 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2631851363825170488}
+--- !u!114 &4842604402820288184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631851364139921169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 1b2394f723f843a4493c88a69ece7ba3, type: 2}
 --- !u!1 &2631851364170024172
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2631851364615230712}
   - component: {fileID: 2631851364615230719}
+  - component: {fileID: 5448022810876051615}
   m_Layer: 0
   m_Name: CM Reveal3
   m_TagString: Untagged
@@ -608,8 +625,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631851364615230713}
-  m_LocalRotation: {x: 0.21856944, y: 0.08429708, z: -0.018955745, w: 0.97198874}
-  m_LocalPosition: {x: 6.73, y: 6.15, z: -51.23}
+  m_LocalRotation: {x: 0.15584151, y: 0.28268683, z: -0.046602592, w: 0.94531995}
+  m_LocalPosition: {x: 2.2, y: 5.34, z: -51.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2631851364098481792}
@@ -653,6 +670,21 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2631851364098481792}
+--- !u!114 &5448022810876051615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631851364615230713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 1b2394f723f843a4493c88a69ece7ba3, type: 2}
 --- !u!1 &2631851364873868477
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,7 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
+  m_BindingMode: 4
   m_FollowOffset: {x: 12.923548, y: -6.545541, z: -6.4429255}
   m_XDamping: 1
   m_YDamping: 1
@@ -758,6 +790,7 @@ GameObject:
   - component: {fileID: 2631851365099300429}
   - component: {fileID: 2631851365099300428}
   - component: {fileID: 2631851365099300435}
+  - component: {fileID: 4565651887049254714}
   m_Layer: 0
   m_Name: CM Dolly1
   m_TagString: Untagged
@@ -836,6 +869,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4565651887049254714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631851365099300430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 1b2394f723f843a4493c88a69ece7ba3, type: 2}
 --- !u!1 &2631851365193956425
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +894,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2631851365193956431}
   - component: {fileID: 2631851365193956424}
+  - component: {fileID: 2996191917486222054}
   m_Layer: 0
   m_Name: CM Reveal2
   m_TagString: Untagged
@@ -860,8 +909,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631851365193956425}
-  m_LocalRotation: {x: 0.038436923, y: -0.31427366, z: 0.01273602, w: 0.9484685}
-  m_LocalPosition: {x: 9.46, y: 2.1, z: -2.5}
+  m_LocalRotation: {x: -0.02832628, y: -0.31439093, z: -0.009385851, w: 0.94882447}
+  m_LocalPosition: {x: 9.46, y: 2.6, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2631851364873868476}
@@ -905,3 +954,18 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2631851364873868476}
+--- !u!114 &2996191917486222054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631851365193956425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 1b2394f723f843a4493c88a69ece7ba3, type: 2}

@@ -14,7 +14,8 @@ namespace RPG.Movement
         [SerializeField] private Animator m_Animator;
         [SerializeField] private Health m_Health;
 
-        private static float m_MaxSpeed = 5.66f;
+        [Header("Parameters")]
+        [SerializeField] private float m_MaxSpeed = 5.66f;
 
         void Update()
         {
