@@ -360,7 +360,8 @@ MonoBehaviour:
   m_BaseStats: {fileID: 0}
   m_RightHandTransform: {fileID: 0}
   m_LeftHandTransform: {fileID: 0}
-  m_DefaultWeapon: {fileID: 0}
+  m_DefaultWeaponConfig: {fileID: 11400000, guid: bff49c6ee95ca9c4abe1f6c93901d136,
+    type: 2}
   TimeBetweenAttacks: 1
 --- !u!114 &6378370562394604551
 MonoBehaviour:
