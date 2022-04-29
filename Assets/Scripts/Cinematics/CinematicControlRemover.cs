@@ -10,6 +10,8 @@ namespace RPG.Cinematics
 {
     public class CinematicControlRemover : MonoBehaviour
     {
+        [SerializeField] private PlayableDirector m_PlayableDirector = null;
+
         private GameObject m_PlayerGO;
 
         private void Awake()
@@ -19,14 +21,14 @@ namespace RPG.Cinematics
 
         private void OnEnable()
         {
-            GetComponent<PlayableDirector>().played += OnPlayed;
-            GetComponent<PlayableDirector>().stopped += OnStopped;
+            m_PlayableDirector.played += OnPlayed;
+            m_PlayableDirector.stopped += OnStopped;
         }
 
         private void OnDisable()
         {
-            GetComponent<PlayableDirector>().played -= OnPlayed;
-            GetComponent<PlayableDirector>().stopped -= OnStopped;
+            m_PlayableDirector.played -= OnPlayed;
+            m_PlayableDirector.stopped -= OnStopped;
         }
 
         private void OnPlayed(PlayableDirector obj)
