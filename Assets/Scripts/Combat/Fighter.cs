@@ -21,9 +21,9 @@ namespace RPG.Combat
         [Header("Other")]
         [SerializeField] private Transform m_RightHandTransform = null;
         [SerializeField] private Transform m_LeftHandTransform = null;
-        [SerializeField] private Weapon m_DefaultWeapon = null;
+        [SerializeField] private WeaponConfig m_DefaultWeapon = null;
         
-        private LazyValue<Weapon> m_CurrentWeapon;
+        private LazyValue<WeaponConfig> m_CurrentWeapon;
         private GameObject m_CurrentWeaponGO = null;
 
         [Header("Parameters")]
@@ -35,7 +35,7 @@ namespace RPG.Combat
 
         public Fighter()
         {
-            m_CurrentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+            m_CurrentWeapon = new LazyValue<WeaponConfig>(SetupDefaultWeapon);
         }
 
         private void Awake()
@@ -43,7 +43,7 @@ namespace RPG.Combat
             //m_CurrentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
         }
 
-        private Weapon SetupDefaultWeapon()
+        private WeaponConfig SetupDefaultWeapon()
         {
             AttachWeapon(m_DefaultWeapon);
             return m_DefaultWeapon;
@@ -74,7 +74,7 @@ namespace RPG.Combat
             }
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(WeaponConfig weapon)
         {
             if (m_CurrentWeaponGO != null)
             {
@@ -85,7 +85,7 @@ namespace RPG.Combat
             AttachWeapon(weapon);
         }
 
-        private void AttachWeapon(Weapon weapon)
+        private void AttachWeapon(WeaponConfig weapon)
         {
             m_CurrentWeaponGO = weapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
         }
@@ -159,7 +159,7 @@ namespace RPG.Combat
 
         public void RestoreState(object state)
         {
-            Weapon weapon = Resources.Load<Weapon>((string)state);
+            WeaponConfig weapon = Resources.Load<WeaponConfig>((string)state);
             EquipWeapon(weapon);
         }
 

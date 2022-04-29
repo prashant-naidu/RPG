@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RPG.Combat
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
-    public class Weapon : ScriptableObject
+    public class WeaponConfig : ScriptableObject
     {
         [Header("References")]
         [SerializeField] private GameObject m_EquippedPrefab = null;
