@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowProjectileRedTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 8266999047353364721, guid: b8db918307d18d545a42cb7f0c5847e4,
+        type: 3}
+      propertyPath: m_IsHoming
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8424969836911152769, guid: b8db918307d18d545a42cb7f0c5847e4,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -24,6 +24,7 @@ namespace RPG.Control
         public float ChaseDistance = 5f;
         public float SuspicionTime = 4f;
         public float AggrevatedCooldownTime = 5f;
+        public float ShoutDistance = 5f;
 
         private GameObject m_PlayerGO;
         private LazyValue<Vector3> m_GuardPosition;
@@ -87,6 +88,22 @@ namespace RPG.Control
         {
             m_TimeSincePlayerLastSeen = 0;
             m_Fighter.Attack(m_PlayerGO);
+
+            AggrevateNearbyEnemies();
+        }
+
+        private void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, ShoutDistance, Vector3.up, 0f);
+            foreach (RaycastHit hit in hits)
+            {
+                AIController ai = hit.transform.gameObject.GetComponent<AIController>();
+
+                if (ai != null)
+                {
+                    ai.Aggrevate();
+                }
+            }
         }
 
         private void SuspicionBehaviour()
