@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8239e7e387b79ce489fea1105ca888a1, type: 3}
   m_Name: Bow Red Projectile
   m_EditorClassIdentifier: 
-  m_EquippedPrefab: {fileID: 5105525801131498703, guid: 625367350893f4943b9f391dbba9e416,
+  m_EquippedWeapon: {fileID: 6151633004864968083, guid: 625367350893f4943b9f391dbba9e416,
     type: 3}
   m_WeaponAnimatorOverrideController: {fileID: 22100000, guid: 28817b354c6004f4b9598f829a98a390,
     type: 2}

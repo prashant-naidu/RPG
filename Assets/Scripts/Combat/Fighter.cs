@@ -87,7 +87,8 @@ namespace RPG.Combat
 
         private void AttachWeapon(WeaponConfig weapon)
         {
-            m_CurrentWeaponGO = weapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
+            Weapon instance = weapon.Spawn(m_RightHandTransform, m_LeftHandTransform, m_Animator);
+            m_CurrentWeaponGO = instance != null ? instance.gameObject : null;
         }
 
         private void AttackBehaviour()

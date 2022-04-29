@@ -7,7 +7,7 @@ namespace RPG.Combat
     public class WeaponConfig : ScriptableObject
     {
         [Header("References")]
-        [SerializeField] private GameObject m_EquippedPrefab = null;
+        [SerializeField] private Weapon m_EquippedWeapon = null;
         [SerializeField] private AnimatorOverrideController m_WeaponAnimatorOverrideController = null;
 
         [Header("Parameters")]
@@ -26,14 +26,14 @@ namespace RPG.Combat
 
         private const string weaponName = "Weapon";
 
-        public GameObject Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        public Weapon Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
-            GameObject weaponGO = null;
+            Weapon weapon = null;
 
-            if (m_EquippedPrefab != null)
+            if (m_EquippedWeapon != null)
             {
-                weaponGO = Instantiate(m_EquippedPrefab, GetHandTransform(rightHand, leftHand));
-                weaponGO.name = weaponName;
+                weapon = Instantiate(m_EquippedWeapon, GetHandTransform(rightHand, leftHand));
+                weapon.gameObject.name = weaponName;
             }
             if (m_WeaponAnimatorOverrideController != null)
             {
@@ -48,7 +48,7 @@ namespace RPG.Combat
                 }
             }
 
-            return weaponGO;
+            return weapon;
         }
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float damage)
