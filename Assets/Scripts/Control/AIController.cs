@@ -23,11 +23,13 @@ namespace RPG.Control
         [Header("Parameters")]
         public float ChaseDistance = 5f;
         public float SuspicionTime = 4f;
+        public float AggrevatedCooldownTime = 5f;
 
         private GameObject m_PlayerGO;
         private LazyValue<Vector3> m_GuardPosition;
         private float m_TimeSincePlayerLastSeen = Mathf.Infinity;
         private float m_TimeSinceArrivedAtWaypoint = Mathf.Infinity;
+        private float m_TimeSinceAggrevated = Mathf.Infinity;
         private float m_WaypointTolerance = 1f;
         private int m_CurrentWaypointIndex = 0;
         [Range(0,1)]
@@ -53,7 +55,7 @@ namespace RPG.Control
         {
             if (m_Health.IsDead) return;
 
-            if (IsPlayerInAttackingRange() && m_Fighter.CanAttack(m_PlayerGO))
+            if (IsAggrevated() && m_Fighter.CanAttack(m_PlayerGO))
             {
                 AttackBehaviour();
             }
@@ -69,10 +71,16 @@ namespace RPG.Control
             UpdateTimers();
         }
 
+        public void Aggrevate()
+        {
+            m_TimeSinceAggrevated = 0;
+        }
+
         private void UpdateTimers()
         {
             m_TimeSincePlayerLastSeen += Time.deltaTime;
             m_TimeSinceArrivedAtWaypoint += Time.deltaTime;
+            m_TimeSinceAggrevated += Time.deltaTime;
         }
 
         private void AttackBehaviour()
@@ -128,10 +136,10 @@ namespace RPG.Control
             Gizmos.DrawWireSphere(transform.position, ChaseDistance);
         }
 
-        private bool IsPlayerInAttackingRange()
+        private bool IsAggrevated()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, m_PlayerGO.transform.position);
-            return distanceToPlayer <= ChaseDistance;
+            return distanceToPlayer <= ChaseDistance || m_TimeSinceAggrevated < AggrevatedCooldownTime;
         }
     }
 }
