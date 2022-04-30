@@ -60,9 +60,7 @@ namespace RPG.Combat
             if (m_Target == null) return;
             if (m_Target.IsDead) return;
 
-            bool isInRange = Vector3.Distance(transform.position, m_Target.transform.position) < m_CurrentWeaponConfig.Range;
-
-            if (!isInRange)
+            if (!IsInRange(m_Target.transform))
             {
                 m_Mover.MoveTo(m_Target.transform.position, 1f);
             }
@@ -83,6 +81,11 @@ namespace RPG.Combat
 
             m_CurrentWeaponConfig = weapon;
             m_CurrentWeapon.value = AttachWeapon(weapon);
+        }
+
+        private bool IsInRange(Transform target)
+        {
+            return Vector3.Distance(transform.position, m_Target.transform.position) < m_CurrentWeaponConfig.Range;
         }
 
         private Weapon AttachWeapon(WeaponConfig weapon)
@@ -133,7 +136,7 @@ namespace RPG.Combat
         public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
-            if (!m_Mover.CanMoveTo(combatTarget.transform.position)) return false;
+            if (!m_Mover.CanMoveTo(combatTarget.transform.position) && !IsInRange(combatTarget.transform)) return false;
             Health targetToTest = combatTarget.GetComponent<Health>();
             return !targetToTest.IsDead;
         }

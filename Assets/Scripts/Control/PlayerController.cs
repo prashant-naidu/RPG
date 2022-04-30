@@ -28,6 +28,7 @@ namespace RPG.Control
 
         [Header("Parameters")]
         [SerializeField] private float m_MaxNavMeshProjectionDistance = 1f;
+        [SerializeField] private float m_RaycastRadius = 0.5f;
 
         // Update is called once per frame
         void Update()
@@ -74,7 +75,7 @@ namespace RPG.Control
 
         private RaycastHit[] RaycastAllSortedByDistance()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), m_RaycastRadius);
             float[] distances = new float[hits.Length];
             for (int i = 0; i < hits.Length; i++)
             {
