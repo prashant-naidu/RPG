@@ -10,6 +10,7 @@ Implements fundamental knowledge of:
 - Save System
 - Combat System (health, damage, attack conditions, weapon configs, ranged vs melee, animations, stat modifiers)
 - AI Systems (patrolling, aggrevation, mob aggrevation)
+- UI (anchoring, pivoting, layout grouping, hierarchy organization, content size fitting, etc)
 - Root Character, Weapon Pickup, other Game instance implementations (nested prefabs, prefab variants)
 - Cinematics (cinemachine, playable directors)
 - Stats and Progression (all characters deriving from a reference sheet from "game designer")
