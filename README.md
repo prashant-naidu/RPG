@@ -7,10 +7,10 @@ This project was made during this Udemy course: https://www.udemy.com/course/uni
 
 Implements fundamental knowledge of:
 - Unity Programming design (component style, modularity, C# interfaces, C# delegates and events, serializing, unity events vs C# events, inspector hook-ups/dependencies vs component search intiialization)
+- UI (anchoring, pivoting, layout grouping, hierarchy organization, content size fitting, etc)
 - Save System
 - Combat System (health, damage, attack conditions, weapon configs, ranged vs melee, animations, stat modifiers)
 - AI Systems (patrolling, aggrevation, mob aggrevation)
-- UI (anchoring, pivoting, layout grouping, hierarchy organization, content size fitting, etc)
 - Root Character, Weapon Pickup, other Game instance implementations (nested prefabs, prefab variants)
 - Cinematics (cinemachine, playable directors)
 - Stats and Progression (all characters deriving from a reference sheet from "game designer")
