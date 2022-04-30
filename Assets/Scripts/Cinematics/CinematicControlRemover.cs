@@ -35,11 +35,13 @@ namespace RPG.Cinematics
         {
             m_PlayerGO.GetComponent<Mover>().Cancel();
             m_PlayerGO.GetComponent<PlayerController>().enabled = false;
+            Cursor.visible = false;
         }
 
         private void OnStopped(PlayableDirector obj)
         {
             m_PlayerGO.GetComponent<PlayerController>().enabled = true;
+            Cursor.visible = true;
         }
     }
 }
