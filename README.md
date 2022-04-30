@@ -6,7 +6,7 @@ https://unity3d.com/get-unity/download/archive
 This project was made during this Udemy course: https://www.udemy.com/course/unityrpg
 
 Implements fundamental knowledge of:
-- Unity Programming design (component style, modularity, C# interfaces, C# delegates and events, serializing, unity events vs C# events, inspector hook-ups/dependencies vs component search intiialization)
+- Unity Programming design (component style, modularity, C# interfaces, C# delegates and events, serializing, unity events vs C# events, inspector hook-ups/dependencies vs component search intialization)
 - UI (anchoring, pivoting, layout grouping, hierarchy organization, content size fitting, etc)
 - Save System
 - Combat System (health, damage, attack conditions, weapon configs, ranged vs melee, animations, stat modifiers)
@@ -21,3 +21,4 @@ Implements fundamental knowledge of:
 
 To-do:
 - Change serializer from BinaryFormatter to a json serializer
+- Refactor out Lazy Intialization
