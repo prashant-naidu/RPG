@@ -64,32 +64,16 @@ namespace RPG.Attributes
         /// </summary>
         public float MaxHealthPoints => m_BaseStats.GetStat(Stat.Health);
 
-        /// <summary>
-        /// Occurs when the scene (?) starts
-        /// </summary>
-        private void Start()
-        {
-        }
-
-        /// <summary>
-        /// Occurs when the actor is enabled.
-        /// </summary>
         private void OnEnable()
         {
             m_BaseStats.OnLevelUp += RegenerateHealth;
         }
 
-        /// <summary>
-        /// Occurs when the actor is disabled.
-        /// </summary>
         private void OnDisable()
         {
             m_BaseStats.OnLevelUp -= RegenerateHealth;
         }
 
-        /// <summary>
-        /// Occurs when a frame is updated.
-        /// </summary>
         private void Update()
         {
             m_Collider.enabled = !IsDead;
