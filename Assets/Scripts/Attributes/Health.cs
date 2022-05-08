@@ -1,12 +1,15 @@
-﻿using GameDevTV.Utils;
-using RPG.Core;
+﻿using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
+    /// <summary>
+    /// Represents the amount of health an actor has.
+    /// </summary>
     public class Health : MonoBehaviour, ISaveable
     {
         [Header("Dependencies")]
@@ -16,95 +19,141 @@ namespace RPG.Attributes
 
         [Header("Other")]
         [SerializeField] private CapsuleCollider m_Collider;
-        [SerializeField] private TakeDamageEvent m_OnTakeDamage;
-        [SerializeField] private UnityEvent m_OnDie;
+        [SerializeField] private TakeDamageEvent m_OnTakeDamage;    // Occurs when an actor receives damage
+        [SerializeField] private UnityEvent m_OnDie;                // Occurs when an actor's health is at 0
 
-        [System.Serializable]
+        [Serializable]
         public class TakeDamageEvent : UnityEvent<float> { }
 
-        private LazyValue<float> m_HealthPoints;
-        public float HealthPoints { get { return m_HealthPoints.value; } }
+        private float m_HealthPoints;                               // The current amount of health.
+        private const float RegenerationPercentage = 70f;           // The percentage of health regenerated.
 
-        private bool m_IsDead = false;
-        public bool IsDead
+        /// <summary>
+        /// Gets or sets the amount of remaining health.
+        /// </summary>
+        public float HealthPoints
         {
-            get
+            get => m_HealthPoints;
+            set
             {
-                return m_IsDead;
+                // Set the new value
+                m_HealthPoints = value;
+
+                // We ded?
+                if (IsDead)
+                {
+                    // Yes.  Invoke the death event
+                    m_OnDie.Invoke();
+
+                    // Trigger the death animation
+                    m_Animator.SetTrigger("die");
+
+                    // Cancel any current action
+                    m_ActionScheduler.CancelCurrentAction();
+                }
             }
         }
 
-        public float MaxHealthPoints { get { return m_BaseStats.GetStat(Stat.Health); } }
+        /// <summary>
+        /// Gets a value indicating whether the actor is dead.
+        /// </summary>
+        public bool IsDead => HealthPoints <= 0;
 
-        private const float m_RegenerationPercentage = 70f;
+        /// <summary>
+        /// Gets the maximum possible health points.
+        /// </summary>
+        public float MaxHealthPoints => m_BaseStats.GetStat(Stat.Health);
 
-        public Health()
-        {
-            m_HealthPoints = new LazyValue<float>(GetInitialHealthPoints);
-        }
-
-        private float GetInitialHealthPoints()
-        {
-            return m_BaseStats.GetStat(Stat.Health);
-        }
-
+        /// <summary>
+        /// Occurs when the scene (?) starts
+        /// </summary>
         private void Start()
         {
-            m_HealthPoints.ForceInit();
         }
 
+        /// <summary>
+        /// Occurs when the actor is enabled.
+        /// </summary>
         private void OnEnable()
         {
             m_BaseStats.OnLevelUp += RegenerateHealth;
         }
 
+        /// <summary>
+        /// Occurs when the actor is disabled.
+        /// </summary>
         private void OnDisable()
         {
             m_BaseStats.OnLevelUp -= RegenerateHealth;
         }
 
+        /// <summary>
+        /// Occurs when a frame is updated.
+        /// </summary>
         private void Update()
         {
-            m_Collider.enabled = !m_IsDead;
+            m_Collider.enabled = !IsDead;
         }
 
-        public float GetPercentage()
-        {
-            return GetFraction() * 100f;
-        }
+        /// <summary>
+        /// Gets the current health as a percentage between 0 and 100.
+        /// </summary>
+        /// <returns></returns>
+        public float GetPercentage() => GetFraction() * 100f;
 
-        public float GetFraction()
-        {
-            return m_HealthPoints.value / m_BaseStats.GetStat(Stat.Health);
-        }
+        /// <summary>
+        /// Gets the current health as a percentage.
+        /// </summary>
+        /// <returns></returns>
+        public float GetFraction() => HealthPoints / m_BaseStats.GetStat(Stat.Health);
 
+        /// <summary>
+        /// Decreases the health by the specified amount.
+        /// </summary>
+        /// <param name="instigator">A <strong>GameObject</strong> object.  The character which caused damage.</param>
+        /// <param name="damage">A <strong>float</strong> value.  The amount of health to lose.</param>
         public void TakeDamage(GameObject instigator, float damage)
         {
+            // Show that we took damage
             print(gameObject.name + " took damage: " + damage);
 
-            m_HealthPoints.value = Mathf.Max(m_HealthPoints.value - damage, 0f);
-            if (m_HealthPoints.value == 0)
+            // Decrease the current health
+            HealthPoints = Mathf.Max(HealthPoints - damage, 0f);
+
+            // Are we ded?
+            if (IsDead)
             {
-                m_OnDie.Invoke();
-                Die();
+                // /yes.  Give the attacker experience
                 AwardExperience(instigator);
             }
             else
             {
+                // No.  Reduce health
                 m_OnTakeDamage.Invoke(damage);
             }
         }
 
+        /// <summary>
+        /// Restores health by the specified amount.
+        /// </summary>
+        /// <param name="healthToRestore"></param>
         public void Heal(float healthToRestore)
         {
-            m_HealthPoints.value = Mathf.Min(m_HealthPoints.value + healthToRestore, MaxHealthPoints);
+            HealthPoints = Mathf.Min(HealthPoints + healthToRestore, MaxHealthPoints);
         }
 
+        /// <summary>
+        /// Increases health by the specified amount.
+        /// </summary>
         private void RegenerateHealth()
         {
-            m_HealthPoints.value = Mathf.Max(m_HealthPoints.value, m_BaseStats.GetStat(Stat.Health) * (m_RegenerationPercentage / 100f));
+            HealthPoints = Mathf.Max(HealthPoints, m_BaseStats.GetStat(Stat.Health) * (RegenerationPercentage / 100f));
         }
 
+        /// <summary>
+        /// Increases the experience by the specified actor's experiance reward.
+        /// </summary>
+        /// <param name="instigator"></param>
         private void AwardExperience(GameObject instigator)
         {
             Experience experience = instigator.GetComponent<Experience>();
@@ -114,29 +163,22 @@ namespace RPG.Attributes
             }
         }
 
-        private void Die()
-        {
-            if (m_IsDead) return;
-
-            m_IsDead = true;
-
-            m_Animator.SetTrigger("die");
-            m_ActionScheduler.CancelCurrentAction();
-        }
-
+        /// <summary>
+        /// Saves the current health.
+        /// </summary>
+        /// <returns></returns>
         public object CaptureState()
         {
-            return m_HealthPoints.value;
+            return HealthPoints;
         }
 
+        /// <summary>
+        /// Deserializes the current health.
+        /// </summary>
+        /// <param name="state"></param>
         public void RestoreState(object state)
         {
-            m_HealthPoints.value = (float)state;
-
-            if (m_HealthPoints.value <= 0)
-            {
-                Die();
-            }
+            HealthPoints = (float)state;
         }
     }
 }
