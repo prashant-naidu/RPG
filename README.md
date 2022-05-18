@@ -13,7 +13,7 @@ Implements fundamental knowledge of:
 - AI Systems (patrolling, aggrevation, mob aggrevation)
 - Root Character, Weapon Pickup, other Game instance implementations (nested prefabs, prefab variants)
 - Cinematics (cinemachine, playable directors)
-- Stats and Progression (all characters deriving from a reference sheet from "game designer")
+- Stats and Progression (all characters deriving from a game designer's reference sheet on a ScriptableObject)
 - Scene Management (storing and restoring state between scenes, persistent objects)
 - Movement (navmesh, pathing)
 - Cursor visuals (Raycasting, Spherecasting, 2D Textures, Raycast sorting)
